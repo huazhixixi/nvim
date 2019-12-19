@@ -115,7 +115,7 @@ let mapleader=" "
 noremap ; :
 
 " Save & quit
-noremap q :q<CR>
+noremap q :q!<CR>
 noremap w :w<CR>
 noremap x :wq<CR>
 
@@ -263,26 +263,15 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
 
-" Genreal Highlighter
-Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
-
 " File navigation
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 
-" Taglist
-Plug 'liuchengxu/vista.vim'
-
 " Error checking
 Plug 'dense-analysis/ale'
-Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
 
 " Undo Tree
 Plug 'mbbill/undotree'
@@ -293,45 +282,28 @@ Plug 'airblade/vim-gitgutter'
 " HTML, CSS, JavaScript, PHP, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
+Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
 " Python
-Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
 Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
 Plug 'tweekmonster/braceless.vim'
 
 " Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 
 " Editor Enhancement
 Plug 'cohama/lexima.vim'
-Plug 'Konfekt/FastFold'
-
-" Input Method Autoswitch
-Plug 'rlue/vim-barbaric'
-
-" Formatter
-Plug 'Chiel92/vim-autoformat'
-
-" Bookmarks
-Plug 'kshenoy/vim-signature'
-
-" Vim Applications
-Plug 'itchyny/calendar.vim'
 
 " Dependencies
-"Plug 'MarcWeber/vim-addon-mw-utils'
-"Plug 'kana/vim-textobj-user'
-"Plug 'roxma/nvim-yarp'
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 call plug#end()
@@ -351,18 +323,8 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
 endif
 source ~/.config/nvim/_machine_specific.vim
 
-
-" ===
-" === Dress up my vim
-" ===
-set termguicolors	" enable true colors support
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-hi NonText ctermfg=gray guifg=grey10
-
 " ===================== Start of Plugin Settings =====================
 
-let g:airline_powerline_fonts = 0
 
 " ==
 " == GitGutter
@@ -372,7 +334,7 @@ let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap H :GitGutterPreviewHunk<CR>
+nnoremap G :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
@@ -382,26 +344,20 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-vimlsp', 'coc-tailwindcss', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp', 'coc-stylelint']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" use <tab> for trigger completion and navigate to the next complete item
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 function! s:check_back_space() abort
 	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
+	return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-inoremap <silent><expr> <Tab>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<Tab>" :
-			\ coc#refresh()
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <silent><expr> <c-space> coc#refresh()
-" Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-nmap <leader>rn <Plug>(coc-rename)
 
 
 " ===
@@ -447,17 +403,9 @@ let g:mkdp_page_title = '「${name}」'
 
 
 " ===
-" === Python-syntax
-" ===
-let g:python_highlight_all = 1
-" let g:python_slow_sync = 0
-
-
-" ===
 " === vim-table-mode
 " ===
 noremap <LEADER>tm :TableModeToggle<CR>
-"let g:table_mode_disable_mappings = 1
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
 
@@ -514,37 +462,9 @@ command! -bang BTags
 
 
 " ===
-" === vim-signature
-" ===
-let g:SignatureMap = {
-			\ 'Leader':"m",
-			\ 'PlaceNextMark':"m,",
-			\ 'ToggleMarkAtLine':"m.",
-			\ 'PurgeMarksAtLine':"dm",
-			\ 'DeleteMark':"",
-			\ 'PurgeMarks':"",
-			\ 'PurgeMarkers':"",
-			\ 'GotoNextLineAlpha':"m<LEADER>",
-			\ 'GotoPrevLineAlpha':"",
-			\ 'GotoNextSpotAlpha':"m<LEADER>",
-			\ 'GotoPrevSpotAlpha':"",
-			\ 'GotoNextLineByPos':"",
-			\ 'GotoPrevLineByPos':"",
-			\ 'GotoNextSpotByPos':"",
-			\ 'GotoPrevSpotByPos':"",
-			\ 'GotoNextMarker':"",
-			\ 'GotoPrevMarker':"",
-			\ 'GotoNextMarkerAny':"",
-			\ 'GotoPrevMarkerAny':"",
-			\ 'ListLocalMarks':"m/",
-			\ 'ListLocalMarkers':"m?"
-			\ }
-
-
-" ===
 " === Undotree
 " ===
-noremap L :UndotreeToggle<CR>
+noremap U :UndotreeToggle<CR>
 let g:undotree_DiffAutoOpen = 1
 let g:undotree_SetFocusWhenToggle = 1
 let g:undotree_ShortIndicators = 1
@@ -552,31 +472,11 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> u <plug>UndotreeNextState
-	nmap <buffer> e <plug>UndotreePreviousState
-	nmap <buffer> U 5<plug>UndotreeNextState
-	nmap <buffer> E 5<plug>UndotreePreviousState
+	nmap <buffer> j <plug>UndotreeNextState
+	nmap <buffer> k <plug>UndotreePreviousState
+	nmap <buffer> J 5<plug>UndotreeNextState
+	nmap <buffer> K 5<plug>UndotreePreviousState
 endfunc
-
-" ===
-" === Vista.vim
-" ===
-noremap <silent> T :Vista!!<CR>
-"noremap <silent> <C-t> :Vista finder<CR>
-function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
-
-" e.g., more compact: ["▸ ", ""]
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-"let g:vista_default_executive = 'ctags'
-" To enable fzf's preview window set g:vista_fzf_preview.
-" The elements of g:vista_fzf_preview will be passed as arguments to fzf#vim#with_preview()
-" For example:
-"let g:vista_fzf_preview = ['right:50%']
 
 
 " ===
@@ -584,44 +484,6 @@ let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
 " ===
 nnoremap R :Ranger<CR>
 let g:ranger_map_keys = 0
-
-
-" ===
-" === Ultisnips
-" ===
-let g:tex_flavor = "latex"
-inoremap <c-n> <nop>
-let g:UltiSnipsExpandTrigger="<c-e>"
-let g:UltiSnipsJumpForwardTrigger="<c-e>"
-let g:UltiSnipsJumpBackwardTrigger="<c-n>"
-let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
-
-
-" ===
-" === vim-calendar
-" ===
-"noremap \c :Calendar -position=here<CR>
-noremap \\ :Calendar -view=clock -position=here<CR>
-let g:calendar_google_calendar = 1
-let g:calendar_google_task = 1
-augroup calendar-mappings
-	autocmd!
-	" diamond cursor
-	autocmd FileType calendar nmap <buffer> u <Plug>(calendar_up)
-	autocmd FileType calendar nmap <buffer> n <Plug>(calendar_left)
-	autocmd FileType calendar nmap <buffer> e <Plug>(calendar_down)
-	autocmd FileType calendar nmap <buffer> i <Plug>(calendar_right)
-	autocmd FileType calendar nmap <buffer> <c-u> <Plug>(calendar_move_up)
-	autocmd FileType calendar nmap <buffer> <c-n> <Plug>(calendar_move_left)
-	autocmd FileType calendar nmap <buffer> <c-e> <Plug>(calendar_move_down)
-	autocmd FileType calendar nmap <buffer> <c-i> <Plug>(calendar_move_right)
-	autocmd FileType calendar nmap <buffer> k <Plug>(calendar_start_insert)
-	autocmd FileType calendar nmap <buffer> K <Plug>(calendar_start_insert_head)
-	" unmap <C-n>, <C-p> for other plugins
-	autocmd FileType calendar nunmap <buffer> <C-n>
-	autocmd FileType calendar nunmap <buffer> <C-p>
-augroup END
 
 
 " ===
@@ -650,46 +512,6 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
 let g:go_highlight_variable_assignments      = 0
 let g:go_highlight_variable_declarations     = 0
-
-
-" ===
-" === AutoFormat
-" ===
-nnoremap \f :Autoformat<CR>
-
-
-" ===
-" === Colorizer
-" ===
-let g:colorizer_syntax = 1
-
-
-" ===
-" === fastfold
-" ===
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
-let g:perl_fold_blocks = 1
-let g:r_syntax_folding = 1
-let g:rust_fold = 1
-let g:php_folding = 1
-
-
-" ===
-" === fzf-quickfix
-" ===
-nnoremap <c-q> :Quickfix!<CR>
 
 
 " ===================== End of Plugin Settings =====================
