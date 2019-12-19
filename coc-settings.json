@@ -4,12 +4,8 @@
 	"codeLens.enable": true,
 	"suggest.detailMaxLength": 60,
 	"languageserver": {
-		"lua": {
-			"command": "lua-lsp",
-			"filetypes": ["lua"]
-		},
 		"golang": {
-			"command": "gopls",
+            "command": "gopls",
 			"rootPatterns": ["go.mod"],
 			"filetypes": ["go"]
 		},
@@ -20,15 +16,15 @@
 			"ignoredRootPaths": []
 		},
 		"ccls": {
-      "command": "ccls",
-      "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
-      "rootPatterns": [".ccls-root", "compile_commands.json"],
-      "initializationOptions": {
-         "cache": {
-           "directory": ".ccls-cache"
-         }
-       }
-    }
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "cuda", "objc", "objcpp"],
+            "rootPatterns": [".ccls-root", "compile_commands.json"],
+            "initializationOptions": {
+                "cache": {
+                    "directory": ".ccls-cache"
+                }
+            }
+        }
 	}
 }
 

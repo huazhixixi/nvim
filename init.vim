@@ -115,7 +115,15 @@ noremap ; :
 
 " Save & quit
 noremap q :q!<CR>
+noremap Q :q!<CR>
 noremap x :w<CR>
+noremap X :w<CR>
+
+" Open the vimrc file anytime
+noremap <LEADER>ri :e ~/.config/nvim/init.vim<CR>
+
+" Reload the vimerc
+noremap <LEADER>rr :source $MYVIMRC<CR>
 
 " Open up lazygit
 noremap \g :term lazygit<CR>
@@ -184,15 +192,6 @@ noremap tml :+tabmove<CR>
 
 
 " ===
-" === Markdown Settings
-" ===
-" Snippets
-source ~/.config/nvim/md-snippets.vim
-" auto spell
-autocmd BufRead,BufNewFile *.md setlocal spell
-
-
-" ===
 " === Other useful stuff
 " ===
 " Opening a terminal window
@@ -205,7 +204,7 @@ noremap \s :%s//g<left><left>
 noremap r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
-	if &filetype == 'c'
+    if &filetype == 'c'
 		exec "!g++ % -o %<"
 		exec "!time ./%<"
 	elseif &filetype == 'cpp'
@@ -214,22 +213,14 @@ func! CompileRunGcc()
 		:sp
 		:res -15
 		:term ./%<
-	elseif &filetype == 'java'
-		exec "!javac %"
-		exec "!time java %<"
-	elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'python'
+    elseif &filetype == 'python'
 		set splitbelow
 		:sp
 		:term python3 %
+    elseif &filetype == 'sh'
+		:!time bash %
 	elseif &filetype == 'html'
 		silent! exec "!chromium % &"
-	elseif &filetype == 'markdown'
-		exec "MarkdownPreview"
-	elseif &filetype == 'tex'
-		silent! exec "VimtexStop"
-		silent! exec "VimtexCompile"
 	elseif &filetype == 'go'
 		set splitbelow
 		:sp
@@ -249,6 +240,7 @@ Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
 
 " File navigation
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 
@@ -261,6 +253,13 @@ Plug 'mbbill/undotree'
 " Git
 Plug 'airblade/vim-gitgutter'
 
+" Genreal Highlighter
+Plug 'jaxbot/semantic-highlight.vim'
+Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+
+" Error checking
+Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+
 " HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
@@ -272,14 +271,23 @@ Plug 'jaxbot/browserlink.vim'
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
 
+" Python
+Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
+Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
+Plug 'tweekmonster/braceless.vim'
+
+" Editor Enhancement
+Plug 'cohama/lexima.vim'
+Plug 'Chiel92/vim-autoformat'
+Plug 'rlue/vim-barbaric'
+Plug 'Konfekt/FastFold'
+
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 call plug#end()
 
-" experimental
-set lazyredraw
-set regexpengine=1
 
 
 " ===
@@ -294,6 +302,37 @@ source ~/.config/nvim/_machine_specific.vim
 
 " ===================== Start of Plugin Settings =====================
 
+" ===
+" === Dress up my vim
+" ===
+set termguicolors	" enable true colors support
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set background=dark
+hi NonText ctermfg=gray guifg=grey10
+
+" ===
+" === fzf-quickfix
+" ===
+nnoremap <c-q> :Quickfix!<CR>
+
+
+" ===
+" === Colorizer
+" ===
+let g:colorizer_syntax = 1
+
+
+" ===
+" === Python-syntax
+" ===
+let g:python_highlight_all = 1
+
+
+" ===
+" === AutoFormat
+" ===
+nnoremap \f :Autoformat<CR>
+
 
 " ==
 " == GitGutter
@@ -302,6 +341,34 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
+
+
+" ===
+" === Ranger.vim
+" ===
+noremap R :Ranger<CR>
+let g:ranger_map_keys = 0
+
+
+" ===
+" === fastfold
+" ===
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
+let g:markdown_folding = 1
+let g:tex_fold_enabled = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+let g:ruby_fold = 1
+let g:perl_fold = 1
+let g:perl_fold_blocks = 1
+let g:r_syntax_folding = 1
+let g:rust_fold = 1
+let g:php_folding = 1
 
 
 " ===
@@ -328,12 +395,17 @@ endfunction
 " ===
 " === FZF
 " ===
-noremap <C-p> :FZF<CR>
-noremap <C-f> :Ag<CR>
+" project root finder
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+noremap <C-p> :ProjectFiles<CR>
+noremap <C-s>p :Ag<CR>
 noremap <C-h> :MRU<CR>
-noremap <C-t> :BTags<CR>
-noremap <C-l> :LinesWithPreview<CR>
-noremap <C-w> :Buffers<CR>
+noremap <C-s>c :LinesWithPreview<CR>
+noremap <C-b> :Buffers<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -345,7 +417,6 @@ command! -bang -nargs=* Buffers
   \   <bang>0 ? fzf#vim#with_preview('up:60%')
   \           : fzf#vim#with_preview('right:0%', '?'),
   \   <bang>0)
-
 
 command! -bang -nargs=* LinesWithPreview
     \ call fzf#vim#grep(
@@ -360,20 +431,7 @@ command! -bang -nargs=* Ag
   \           : fzf#vim#with_preview('right:50%', '?'),
   \   <bang>0)
 
-
 command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
-
-command! -bang BTags
-  \ call fzf#vim#buffer_tags('', {
-  \     'down': '40%',
-  \     'options': '--with-nth 1 
-  \                 --reverse 
-  \                 --prompt "> " 
-  \                 --preview-window="70%" 
-  \                 --preview "
-  \                     tail -n +\$(echo {3} | tr -d \";\\\"\") {2} |
-  \                     head -n 16"'
-  \ })
 
 
 " ===
@@ -390,15 +448,8 @@ function g:Undotree_CustomMap()
 	nmap <buffer> k <plug>UndotreeNextState
 	nmap <buffer> j <plug>UndotreePreviousState
 	nmap <buffer> K 5<plug>UndotreeNextState
-	nmap <buffer> j 5<plug>UndotreePreviousState
+	nmap <buffer> J 5<plug>UndotreePreviousState
 endfunc
-
-
-" ===
-" === Ranger.vim
-" ===
-noremap R :Ranger<CR>
-let g:ranger_map_keys = 0
 
 
 " ===
@@ -429,15 +480,15 @@ let g:go_highlight_variable_assignments      = 0
 let g:go_highlight_variable_declarations     = 0
 
 
-
 " ===================== End of Plugin Settings =====================
+
+" experimental
+set regexpengine=1
 
 " ===
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
-
-
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
