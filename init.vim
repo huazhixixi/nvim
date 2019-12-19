@@ -79,7 +79,6 @@ if has('persistent_undo')
 endif
 "set colorcolumn=80
 set updatetime=1000
-
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -116,17 +115,7 @@ noremap ; :
 
 " Save & quit
 noremap q :q!<CR>
-noremap w :w<CR>
-noremap x :wq<CR>
-
-" Open the vimrc file anytime
-noremap <LEADER>ri :e ~/.config/nvim/init.vim<CR>
-
-" Search
-noremap <LEADER><CR> :nohlsearch<CR>
-
-" Folding
-noremap <silent> <LEADER>o za
+noremap x :w<CR>
 
 " Open up lazygit
 noremap \g :term lazygit<CR>
@@ -136,13 +125,9 @@ noremap <c-g> :term lazygit<CR>
 " ===
 " === Cursor Movement
 " ===
-" U/E keys for 5 times u/e (faster navigation)
 noremap <silent> K 5k
 noremap <silent> J 5j
-
-" N key: go to the start of the line
 noremap <silent> H 0
-" I key: go to the end of the line
 noremap <silent> L $
 
 " Faster in-line navigation
@@ -164,19 +149,19 @@ noremap <LEADER>l <C-w>l
 noremap s <nop>
 
 " Place the two screens up and down
-noremap sh <C-w>t<C-w>K
+noremap smh <C-w>t<C-w>K
 " Place the two screens side by side
-noremap sv <C-w>t<C-w>H
+noremap smv <C-w>t<C-w>H
 
 " Rotate screens
 noremap srh <C-w>b<C-w>K
 noremap srv <C-w>b<C-w>H
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-"noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-"noremap sj :set splitbelow<CR>:split<CR>
-"noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-"noremap sl :set splitright<CR>:vsplit<CR>
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
 
 " Resize splits with arrow keys
 noremap <up> :res +5<CR>
@@ -219,7 +204,7 @@ noremap \s :%s//g<left><left>
 " Compile function
 noremap r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-	exec "w"
+    exec "w"
 	if &filetype == 'c'
 		exec "!g++ % -o %<"
 		exec "!time ./%<"
@@ -267,9 +252,6 @@ Plug 'bling/vim-bufferline'
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 
-" Error checking
-Plug 'dense-analysis/ale'
-
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -279,29 +261,16 @@ Plug 'mbbill/undotree'
 " Git
 Plug 'airblade/vim-gitgutter'
 
-" HTML, CSS, JavaScript, PHP, JSON, etc.
+" HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'jaxbot/browserlink.vim'
-Plug 'spf13/PIV', { 'for' :['php', 'vim-plug'] }
 
 " Go
 Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
-
-" Python
-Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-Plug 'tweekmonster/braceless.vim'
-
-" Markdown
-Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() } }
-Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-
-" Editor Enhancement
-Plug 'cohama/lexima.vim'
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
@@ -333,10 +302,6 @@ let g:gitgutter_map_keys = 0
 let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 1
 autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap G :GitGutterPreviewHunk<CR>
-nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
-nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 
 " ===
@@ -344,7 +309,7 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -361,55 +326,6 @@ endfunction
 
 
 " ===
-" === some error checking
-" ===
-let g:ale_virtualtext_cursor = 1
-let g:ale_linters = {
-			\ 'go': ['vim-go'],
-			\ 'c' : ['ccls']
-			\}
-let g:ale_cpp_ccls_init_options = {
-			\   'cache': {
-			\       'directory': '/tmp/ccls/cache'
-			\   }
-			\ }
-let g:ale_c_gcc_executable = '/usr/bin/gcc'
-
-
-" ===
-" === MarkdownPreview
-" ===
-let g:mkdp_auto_start = 0
-let g:mkdp_auto_close = 1
-let g:mkdp_refresh_slow = 0
-let g:mkdp_command_for_global = 0
-let g:mkdp_open_to_the_world = 0
-let g:mkdp_open_ip = ''
-let g:mkdp_echo_preview_url = 0
-let g:mkdp_browserfunc = ''
-let g:mkdp_preview_options = {
-			\ 'mkit': {},
-			\ 'katex': {},
-			\ 'uml': {},
-			\ 'maid': {},
-			\ 'disable_sync_scroll': 0,
-			\ 'sync_scroll_type': 'middle',
-			\ 'hide_yaml_meta': 1
-			\ }
-let g:mkdp_markdown_css = ''
-let g:mkdp_highlight_css = ''
-let g:mkdp_port = ''
-let g:mkdp_page_title = '「${name}」'
-
-
-" ===
-" === vim-table-mode
-" ===
-noremap <LEADER>tm :TableModeToggle<CR>
-let g:table_mode_cell_text_object_i_map = 'k<Bar>'
-
-
-" ===
 " === FZF
 " ===
 noremap <C-p> :FZF<CR>
@@ -418,7 +334,6 @@ noremap <C-h> :MRU<CR>
 noremap <C-t> :BTags<CR>
 noremap <C-l> :LinesWithPreview<CR>
 noremap <C-w> :Buffers<CR>
-noremap q; :History:<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -472,17 +387,17 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> j <plug>UndotreeNextState
-	nmap <buffer> k <plug>UndotreePreviousState
-	nmap <buffer> J 5<plug>UndotreeNextState
-	nmap <buffer> K 5<plug>UndotreePreviousState
+	nmap <buffer> k <plug>UndotreeNextState
+	nmap <buffer> j <plug>UndotreePreviousState
+	nmap <buffer> K 5<plug>UndotreeNextState
+	nmap <buffer> j 5<plug>UndotreePreviousState
 endfunc
 
 
 " ===
 " === Ranger.vim
 " ===
-nnoremap R :Ranger<CR>
+noremap R :Ranger<CR>
 let g:ranger_map_keys = 0
 
 
@@ -512,6 +427,7 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
 let g:go_highlight_variable_assignments      = 0
 let g:go_highlight_variable_declarations     = 0
+
 
 
 " ===================== End of Plugin Settings =====================
