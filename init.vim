@@ -157,13 +157,13 @@ noremap <LEADER>l <C-w>l
 noremap s <nop>
 
 " Place the two screens up and down
-noremap smh <C-w>t<C-w>K
+noremap smv <C-w>t<C-w>K
 " Place the two screens side by side
-noremap smv <C-w>t<C-w>H
+noremap smh <C-w>t<C-w>H
 
 " Rotate screens
-noremap srh <C-w>b<C-w>K
-noremap srv <C-w>b<C-w>H
+noremap srv <C-w>b<C-w>K
+noremap srh <C-w>b<C-w>H
 
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
 noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
@@ -331,7 +331,7 @@ let g:python_highlight_all = 1
 " ===
 " === AutoFormat
 " ===
-nnoremap \f :Autoformat<CR>
+au BufWrite * :Autoformat
 
 
 " ==
