@@ -10,9 +10,9 @@
 " === Auto load for first time uses
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 " ====================
@@ -74,8 +74,8 @@ silent !mkdir -p ~/.config/nvim/tmp/undo
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
-	set undofile
-	set undodir=~/.config/nvim/tmp/undo,.
+    set undofile
+    set undodir=~/.config/nvim/tmp/undo,.
 endif
 "set colorcolumn=80
 set updatetime=1000
@@ -205,27 +205,29 @@ noremap r :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
     if &filetype == 'c'
-		exec "!g++ % -o %<"
-		exec "!time ./%<"
-	elseif &filetype == 'cpp'
-		set splitbelow
-		exec "!g++ -std=c++11 % -Wall -o %<"
-		:sp
-		:res -15
-		:term ./%<
+        exec "!g++ % -o %<"
+        exec "!time ./%<"
+    elseif &filetype == 'cpp'
+        set splitbelow
+        exec "!g++ -std=c++11 % -Wall -o %<"
+        :sp
+        :res -15
+        :term ./%<
     elseif &filetype == 'python'
-		set splitbelow
-		:sp
-		:term python3 %
+        set splitbelow
+        :sp
+        :term python3 %
+    elseif &filetype == 'markdown'
+        exec "MarkdownPreview"
     elseif &filetype == 'sh'
-		:!time bash %
-	elseif &filetype == 'html'
-		silent! exec "!chromium % &"
-	elseif &filetype == 'go'
-		set splitbelow
-		:sp
-		:term go run %
-	endif
+        :!time bash %
+    elseif &filetype == 'html'
+        silent! exec "!chromium % &"
+    elseif &filetype == 'go'
+        set splitbelow
+        :sp
+        :term go run %
+    endif
 endfunc
 
 
@@ -238,6 +240,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
+Plug 'ajmwagar/vim-deus'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -259,6 +262,11 @@ Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 " Error checking
 Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+
+" Markdown
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
+Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
+Plug 'dkarter/bullets.vim'
 
 " HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
@@ -295,8 +303,8 @@ call plug#end()
 " ===
 let has_machine_specific_file = 1
 if empty(glob('~/.config/nvim/_machine_specific.vim'))
-	let has_machine_specific_file = 0
-	silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+    let has_machine_specific_file = 0
+    silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
 endif
 source ~/.config/nvim/_machine_specific.vim
 
@@ -305,9 +313,10 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Dress up my vim
 " ===
-set termguicolors	" enable true colors support
+set termguicolors   " enable true colors support
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set background=dark
+colors deus
 hi NonText ctermfg=gray guifg=grey10
 
 " ===
@@ -349,6 +358,49 @@ autocmd BufWritePost * GitGutter
 noremap R :Ranger<CR>
 let g:ranger_map_keys = 0
 
+" ===
+" === MarkdownPreview
+" ===
+let g:mkdp_auto_start = 0
+let g:mkdp_auto_close = 1
+let g:mkdp_refresh_slow = 0
+let g:mkdp_command_for_global = 0
+let g:mkdp_open_to_the_world = 0
+let g:mkdp_open_ip = ''
+let g:mkdp_echo_preview_url = 0
+let g:mkdp_browserfunc = ''
+let g:mkdp_preview_options = {
+            \ 'mkit': {},
+            \ 'katex': {},
+            \ 'uml': {},
+            \ 'maid': {},
+            \ 'disable_sync_scroll': 0,
+            \ 'sync_scroll_type': 'middle',
+            \ 'hide_yaml_meta': 1
+            \ }
+let g:mkdp_markdown_css = ''
+let g:mkdp_highlight_css = ''
+let g:mkdp_port = ''
+let g:mkdp_page_title = '「${name}」'
+
+
+" ===
+" === vim-table-mode
+" ===
+noremap <LEADER>tm :TableModeToggle<CR>
+"let g:table_mode_disable_mappings = 1
+let g:table_mode_cell_text_object_i_map = 'k<Bar>'
+
+" ===
+" === Bullets.vim
+" ===
+"let g:bullets_set_mappings = 0
+let g:bullets_enabled_file_types = [
+            \ 'markdown',
+            \ 'text',
+            \ 'gitcommit',
+            \ 'scratch'
+            \]
 
 " ===
 " === fastfold
@@ -381,14 +433,14 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
+            \ pumvisible() ? "\<C-n>" :
+            \ <SID>check_back_space() ? "\<TAB>" :
+            \ coc#refresh()
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
 
@@ -397,7 +449,7 @@ endfunction
 " ===
 " project root finder
 function! s:find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
@@ -409,27 +461,27 @@ noremap <C-b> :Buffers<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 ruler
+            \| autocmd BufLeave <buffer> set laststatus=2 ruler
 
 command! -bang -nargs=* Buffers
-  \ call fzf#vim#buffers(
-  \   '',
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:0%', '?'),
-  \   <bang>0)
+            \ call fzf#vim#buffers(
+            \   '',
+            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+            \           : fzf#vim#with_preview('right:0%', '?'),
+            \   <bang>0)
 
 command! -bang -nargs=* LinesWithPreview
-    \ call fzf#vim#grep(
-    \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
-    \   fzf#vim#with_preview({}, 'up:50%', '?'),
-    \   1)
+            \ call fzf#vim#grep(
+            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+            \   fzf#vim#with_preview({}, 'up:50%', '?'),
+            \   1)
 
 command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(
-  \   '',
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%', '?'),
-  \   <bang>0)
+            \ call fzf#vim#ag(
+            \   '',
+            \   <bang>0 ? fzf#vim#with_preview('up:60%')
+            \           : fzf#vim#with_preview('right:50%', '?'),
+            \   <bang>0)
 
 command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
 
@@ -445,10 +497,10 @@ let g:undotree_WindowLayout = 2
 let g:undotree_DiffpanelHeight = 8
 let g:undotree_SplitWidth = 24
 function g:Undotree_CustomMap()
-	nmap <buffer> k <plug>UndotreeNextState
-	nmap <buffer> j <plug>UndotreePreviousState
-	nmap <buffer> K 5<plug>UndotreeNextState
-	nmap <buffer> J 5<plug>UndotreePreviousState
+    nmap <buffer> k <plug>UndotreeNextState
+    nmap <buffer> j <plug>UndotreePreviousState
+    nmap <buffer> K 5<plug>UndotreeNextState
+    nmap <buffer> J 5<plug>UndotreePreviousState
 endfunc
 
 
@@ -492,6 +544,6 @@ exec "nohlsearch"
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
-	exec "e ~/.config/nvim/_machine_specific.vim"
+    exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
