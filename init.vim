@@ -22,7 +22,7 @@ endif
 " ===
 " === System
 " ===
-set clipboard=unnamed
+"set clipboard=unnamed
 let &t_ut=''
 set autochdir
 
@@ -277,7 +277,7 @@ Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javas
 Plug 'jaxbot/browserlink.vim'
 
 " Go
-Plug 'fatih/vim-go' , { 'for': ['go', 'vim-plug'], 'tag': '*' }
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python
 Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
