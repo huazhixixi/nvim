@@ -114,17 +114,14 @@ let mapleader=" "
 " Save & quit
 noremap q :q!<CR>
 noremap Q :q!<CR>
-noremap x :w<CR>
-noremap X :w<CR>
-
+noremap w :w<CR>
+noremap W :w<CR>
+noremap x :wq<CR>
+noremap X :wq<CR>
 " Open the vimrc file anytime
 noremap <LEADER>oi :e ~/.config/nvim/init.vim<CR>
-
-" Reload the vimerc
-noremap <LEADER>ri :source $MYVIMRC<CR>
-
 " Open up lazygit
-noremap <LEADER>gg :term lazygit<CR>
+noremap <LEADER>lg :term lazygit<CR>
 
 
 " ===
@@ -132,12 +129,8 @@ noremap <LEADER>gg :term lazygit<CR>
 " ===
 noremap <silent> K 5k
 noremap <silent> J 5j
-noremap <silent> H 0
-noremap <silent> L $
-
-" Faster in-line navigation
-noremap W 5w
-noremap B 5b
+noremap <silent> H 1b
+noremap <silent> L 1w
 
 
 " ===
@@ -145,45 +138,27 @@ noremap B 5b
 " ===
 " Disable the default s key
 noremap s <nop>
-
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
 noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap sj :set splitbelow<CR>:split<CR>
 noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
 noremap sl :set splitright<CR>:vsplit<CR>
-
-" Place the two screens up and down
 noremap smv <C-w>t<C-w>K
-" Place the two screens side by side
 noremap smh <C-w>t<C-w>H
-
-" Rotate screens
-noremap srv <C-w>b<C-w>K
-noremap srh <C-w>b<C-w>H
-
-" Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
-noremap <LEADER>k <C-w>k
-noremap <LEADER>j <C-w>j
-noremap <LEADER>h <C-w>h
-noremap <LEADER>l <C-w>l
-
-" Resize splits with arrow keys
-noremap <up> :res +5<CR>
-noremap <down> :res -5<CR>
-noremap <left> :vertical resize-5<CR>
-noremap <right> :vertical resize+5<CR>
+" moving the cursor around windows
+noremap so <C-w>w
+noremap <up> <C-w>k
+noremap <down> <C-w>j
+noremap <left> <C-w>h
+noremap <right> <C-w>l
 
 
 " ===
 " === Tab management
 " ===
-" Create a new tab with tu
 noremap tt :tabe<CR>
-" Move around tabs with tn and ti
 noremap th :-tabnext<CR>
 noremap tl :+tabnext<CR>
-" Move the tabs with tmn and tmi
 noremap tmh :-tabmove<CR>
 noremap tml :+tabmove<CR>
 
@@ -286,7 +261,6 @@ Plug 'tweekmonster/braceless.vim'
 Plug 'cohama/lexima.vim'
 Plug 'Chiel92/vim-autoformat'
 Plug 'rlue/vim-barbaric'
-Plug 'Konfekt/FastFold'
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
@@ -406,33 +380,13 @@ let g:bullets_enabled_file_types = [
             \ 'scratch'
             \]
 
-" ===
-" === fastfold
-" ===
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-let g:markdown_folding = 1
-let g:tex_fold_enabled = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
-let g:ruby_fold = 1
-let g:perl_fold = 1
-let g:perl_fold_blocks = 1
-let g:r_syntax_folding = 1
-let g:rust_fold = 1
-let g:php_folding = 1
-
 
 " ===
 " === coc
 " ===
 " fix the most annoying bug that coc has
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp', 'coc-yank', 'coc-stylelint']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -446,6 +400,7 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
 
 
 " ===
@@ -511,10 +466,7 @@ endfunc
 " ===
 " === vim-go
 " ===
-let g:go_template_autocreate = 0
-let g:go_textobj_enabled = 0
-let g:go_auto_type_info = 1
-"let g:go_def_mapping_enabled = 1
+let g:go_auto_type_info                      = 1
 let g:go_highlight_array_whitespace_error    = 1
 let g:go_highlight_build_constraints         = 1
 let g:go_highlight_chan_whitespace_error     = 1
@@ -534,12 +486,10 @@ let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
 let g:go_highlight_variable_assignments      = 0
 let g:go_highlight_variable_declarations     = 0
+let g:go_doc_keywordprg_enabled              = 0
 
 
 " ===================== End of Plugin Settings =====================
-
-" experimental
-set regexpengine=1
 
 " ===
 " === Necessary Commands to Execute
