@@ -22,7 +22,7 @@ endif
 " ===
 " === System
 " ===
-"set clipboard=unnamed
+set clipboard=unnamed
 let &t_ut=''
 set autochdir
 
@@ -111,7 +111,6 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
-noremap ; :
 
 " Save & quit
 noremap q :q!<CR>
@@ -120,14 +119,13 @@ noremap x :w<CR>
 noremap X :w<CR>
 
 " Open the vimrc file anytime
-noremap <LEADER>ri :e ~/.config/nvim/init.vim<CR>
+noremap <LEADER>oi :e ~/.config/nvim/init.vim<CR>
 
 " Reload the vimerc
-noremap <LEADER>rr :source $MYVIMRC<CR>
+noremap <LEADER>ri :source $MYVIMRC<CR>
 
 " Open up lazygit
-noremap \g :term lazygit<CR>
-noremap <c-g> :term lazygit<CR>
+noremap <LEADER>gg :term lazygit<CR>
 
 
 " ===
@@ -146,15 +144,14 @@ noremap B 5b
 " ===
 " === Window management
 " ===
-" Use <space> + new arrow keys for moving the cursor around windows
-noremap <LEADER>w <C-w>w
-noremap <LEADER>k <C-w>k
-noremap <LEADER>j <C-w>j
-noremap <LEADER>h <C-w>h
-noremap <LEADER>l <C-w>l
-
 " Disable the default s key
 noremap s <nop>
+
+" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
+noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap sj :set splitbelow<CR>:split<CR>
+noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap sl :set splitright<CR>:vsplit<CR>
 
 " Place the two screens up and down
 noremap smv <C-w>t<C-w>K
@@ -165,11 +162,12 @@ noremap smh <C-w>t<C-w>H
 noremap srv <C-w>b<C-w>K
 noremap srh <C-w>b<C-w>H
 
-" split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap sj :set splitbelow<CR>:split<CR>
-noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap sl :set splitright<CR>:vsplit<CR>
+" Use <space> + new arrow keys for moving the cursor around windows
+noremap <LEADER>w <C-w>w
+noremap <LEADER>k <C-w>k
+noremap <LEADER>j <C-w>j
+noremap <LEADER>h <C-w>h
+noremap <LEADER>l <C-w>l
 
 " Resize splits with arrow keys
 noremap <up> :res +5<CR>
