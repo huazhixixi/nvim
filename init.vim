@@ -30,6 +30,7 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
+set hidden
 set number
 set relativenumber
 set cursorline
@@ -63,6 +64,8 @@ set formatoptions-=tc
 set splitright
 set splitbelow
 set noshowmode
+set signcolumn=yes
+set cmdheight=2
 set shortmess+=c
 set inccommand=split
 set ttyfast "should make scrolling faster
@@ -77,7 +80,7 @@ if has('persistent_undo')
     set undodir=~/.config/nvim/tmp/undo,.
 endif
 "set colorcolumn=80
-set updatetime=1000
+set updatetime=300
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -108,6 +111,11 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " === Basic Mappings
 " ===
+" Disable default key
+noremap <C-c> <nop>
+noremap <C-x> <nop>
+noremap <C-s> <nop>
+
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
 
@@ -118,10 +126,14 @@ noremap w :w<CR>
 noremap W :w<CR>
 noremap x :wq<CR>
 noremap X :wq<CR>
+noremap <C-x><C-c> :q!<CR>
+noremap <C-x><C-s> :w<CR>
+
 " Open the vimrc file anytime
 noremap <LEADER>oi :e ~/.config/nvim/init.vim<CR>
+
 " Open up lazygit
-noremap <LEADER>lg :term lazygit<CR>
+noremap <C-x>g :term lazygit<CR>
 
 
 " ===
@@ -146,7 +158,7 @@ noremap sl :set splitright<CR>:vsplit<CR>
 noremap smv <C-w>t<C-w>K
 noremap smh <C-w>t<C-w>H
 " moving the cursor around windows
-noremap so <C-w>w
+noremap ss <C-w>w
 noremap <up> <C-w>k
 noremap <down> <C-w>j
 noremap <left> <C-w>h
@@ -167,7 +179,7 @@ noremap tml :+tabmove<CR>
 " === Other useful stuff
 " ===
 " Opening a terminal window
-noremap <LEADER>/ :term<CR>
+noremap <C-x>/ :term<CR>
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -229,7 +241,6 @@ Plug 'mbbill/undotree'
 Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
-Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 " Error checking
@@ -240,26 +251,14 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim'
 
-" HTML, CSS, JavaScript, JSON, etc.
-Plug 'elzr/vim-json'
-Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jaxbot/browserlink.vim'
-
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Python
-Plug 'tmhedberg/SimpylFold', { 'for' :['python', 'vim-plug'] }
-Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
-Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins', 'for' :['python', 'vim-plug'] }
-Plug 'tweekmonster/braceless.vim'
+" Formatter
+Plug 'Chiel92/vim-autoformat'
 
 " Editor Enhancement
 Plug 'cohama/lexima.vim'
-Plug 'Chiel92/vim-autoformat'
 Plug 'rlue/vim-barbaric'
 
 " Dependencies
@@ -298,27 +297,15 @@ set termguicolors
 hi LineNr ctermbg=NONE guibg=NONE
 
 " ===
-" === fzf-quickfix
+" === AutoFormat
 " ===
-nnoremap <c-q> :Quickfix!<CR>
+au BufWrite * :Autoformat
 
 
 " ===
 " === Colorizer
 " ===
 let g:colorizer_syntax = 1
-
-
-" ===
-" === Python-syntax
-" ===
-let g:python_highlight_all = 1
-
-
-" ===
-" === AutoFormat
-" ===
-au BufWrite * :Autoformat
 
 
 " ==
@@ -380,27 +367,13 @@ let g:bullets_enabled_file_types = [
             \ 'scratch'
             \]
 
-
 " ===
 " === coc
 " ===
-" fix the most annoying bug that coc has
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-lists', 'coc-vimlsp', 'coc-yank', 'coc-stylelint']
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-tailwindcss', 'coc-stylelint', 'coc-phpls']
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+" Useful commands
+nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 
 
 " ===
@@ -412,11 +385,11 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <C-p> :ProjectFiles<CR>
-noremap <C-s>p :Ag<CR>
-noremap <C-h> :MRU<CR>
-noremap <C-s>c :LinesWithPreview<CR>
-noremap <C-b> :Buffers<CR>
+noremap <C-c>i :ProjectFiles<CR>
+noremap <C-c>s :Ag<CR>
+noremap <C-c>l :Quickfix!<CR>
+noremap <C-s>  :LinesWithPreview<CR>
+noremap <C-x>b :Buffers<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -431,7 +404,7 @@ command! -bang -nargs=* Buffers
 
 command! -bang -nargs=* LinesWithPreview
             \ call fzf#vim#grep(
-            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case . '.fnameescape(expand('%')), 1,
+            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case --word-regexp . '.fnameescape(expand('%')), 1,
             \   fzf#vim#with_preview({}, 'up:50%', '?'),
             \   1)
 
@@ -441,8 +414,6 @@ command! -bang -nargs=* Ag
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:50%', '?'),
             \   <bang>0)
-
-command! -bang -nargs=* MRU call fzf#vim#history(fzf#vim#with_preview())
 
 
 " ===
