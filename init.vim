@@ -55,7 +55,6 @@ set foldmethod=indent
 set foldlevel=99
 set autoindent
 set laststatus=2
-
 set ttimeoutlen=0
 set notimeout
 set viewoptions=cursor,folds,slash,unix
@@ -238,7 +237,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'liuchengxu/eleline.vim'
 Plug 'bling/vim-bufferline'
-Plug 'ajmwagar/vim-deus'
+Plug 'liuchengxu/space-vim-dark'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -311,11 +310,18 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === Dress up my vim
 " ===
-set termguicolors   " enable true colors support
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-set background=dark
-colors deus
-hi NonText ctermfg=gray guifg=grey10
+colorscheme space-vim-dark
+" 注释斜体
+hi Comment cterm=italic
+" 灰色注释
+hi Comment guifg=#5C6370 ctermfg=59
+" 背景透明
+"hi Normal     ctermbg=NONE guibg=NONE
+"hi LineNr     ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
+" 开启真彩色
+set termguicolors
+hi LineNr ctermbg=NONE guibg=NONE
 
 " ===
 " === fzf-quickfix
