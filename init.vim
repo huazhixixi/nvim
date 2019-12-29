@@ -324,6 +324,15 @@ noremap R :Ranger<CR>
 let g:ranger_map_keys = 0
 
 " ===
+" === coc
+" ===
+let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-tailwindcss', 'coc-stylelint', 'coc-phpls']
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" Useful commands
+nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
+
+
+" ===
 " === MarkdownPreview
 " ===
 let g:mkdp_auto_start = 0
@@ -366,14 +375,6 @@ let g:bullets_enabled_file_types = [
             \ 'gitcommit',
             \ 'scratch'
             \]
-
-" ===
-" === coc
-" ===
-let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-gitignore', 'coc-tailwindcss', 'coc-stylelint', 'coc-phpls']
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" Useful commands
-nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 
 
 " ===
