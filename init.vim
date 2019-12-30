@@ -299,7 +299,7 @@ hi LineNr ctermbg=NONE guibg=NONE
 " ===
 " === AutoFormat
 " ===
-au BufWrite * :Autoformat
+nnoremap \f :Autoformat<CR>
 
 
 " ===

@@ -13,16 +13,18 @@ git clone --depth 1 https://github.com/Wjinlei/nvim.git ~/.config/nvim
 - Ranger
 - Undotree
 - Markdown
-- GoLang
-- Python
-- html、css、javascript php etc.
-
+- Auto Complete
+    - GoLang
+    - Python
+    - html、css、javascript php etc.
+    - Shell
+    - C&Cpp
 ### After installation You Need To:
-- Install `pynvim` for pip
-- Install `nodejs` and do  `sudo npm install -g neovim`
-- Install `nerd-fonts` (actually it's optional but it looks real good)
 - Do `:checkhealth`
 - Config Python path See `_machine_specific.vim`
+- Install `pynvim` for pip
+- Install `nodejs` and do  `npm install -g neovim`
+- Install `nerd-fonts` (actually it's optional but it looks real good)
 
 ### After Installation, You Might Want To:
 Python:
@@ -34,3 +36,8 @@ Go:
 ```
 :GoInstallBinary
 ```
+Bash
+```
+npm install -g bash-language-server
+```
+C&Cpp Install ccls
