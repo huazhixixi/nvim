@@ -326,6 +326,7 @@ let g:ranger_map_keys = 0
 " ===
 " === coc
 " ===
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json', 'coc-css', 'coc-tsserver', 'coc-yank', 'coc-lists', 'coc-stylelint', 'coc-phpls']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
