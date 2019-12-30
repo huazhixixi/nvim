@@ -2,6 +2,8 @@
 My config fock of `@theniceboy`,Thank you brother.<br/>
 Because I was an Emacs user. therefore this is a kind of nvim configuration like Emacs shortcut key
 
+![preview](./preview.jpg)
+
 ### Quick Start
 ```
 mv ~/.config/nvim ~/.config/nvim.bak
