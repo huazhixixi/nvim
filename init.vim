@@ -111,10 +111,11 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " === Basic Mappings
 " ===
-" Disable default key
+" Disable the default s key
+noremap s <nop>
 noremap <C-c> <nop>
-noremap <C-x> <nop>
 noremap <C-s> <nop>
+noremap <C-x> <nop>
 
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
@@ -126,14 +127,12 @@ noremap w :w<CR>
 noremap W :w<CR>
 noremap x :wq<CR>
 noremap X :wq<CR>
-noremap <C-x><C-c> :q!<CR>
-noremap <C-x><C-s> :w<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>oi :e ~/.config/nvim/init.vim<CR>
 
 " Open up lazygit
-noremap <C-x>g :term lazygit<CR>
+noremap <LEADER>lg :term lazygit<CR>
 
 
 " ===
@@ -141,15 +140,13 @@ noremap <C-x>g :term lazygit<CR>
 " ===
 noremap <silent> K 5k
 noremap <silent> J 5j
-noremap <silent> H 1b
-noremap <silent> L 1w
+noremap <silent> H 5b
+noremap <silent> L 5w
 
 
 " ===
 " === Window management
 " ===
-" Disable the default s key
-noremap s <nop>
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
 noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap sj :set splitbelow<CR>:split<CR>
@@ -159,10 +156,14 @@ noremap smv <C-w>t<C-w>K
 noremap smh <C-w>t<C-w>H
 " moving the cursor around windows
 noremap ss <C-w>w
-noremap <up> <C-w>k
-noremap <down> <C-w>j
-noremap <left> <C-w>h
-noremap <right> <C-w>l
+noremap <LEADER>k <C-w>k
+noremap <LEADER>j <C-w>j
+noremap <LEADER>h <C-w>h
+noremap <LEADER>l <C-w>l
+noremap <Up> <C-w>k
+noremap <Down> <C-w>j
+noremap <Left> <C-w>h
+noremap <Right> <C-w>l
 
 
 " ===
@@ -179,7 +180,7 @@ noremap tml :+tabmove<CR>
 " === Other useful stuff
 " ===
 " Opening a terminal window
-noremap <C-x>/ :term<CR>
+noremap <LEADER>/ :term<CR>
 
 " find and replace
 noremap \s :%s//g<left><left>
@@ -351,7 +352,7 @@ function! s:show_documentation()
     endif
 endfunction
 " Useful commands
-nnoremap <silent> <space>y :<C-u>CocList -A --normal yank<cr>
+nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 
 
 " ===
