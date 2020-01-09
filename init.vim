@@ -284,7 +284,7 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'landscape',
       \ }
 
 
