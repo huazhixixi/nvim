@@ -223,8 +223,7 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-Plug 'liuchengxu/eleline.vim'
-Plug 'bling/vim-bufferline'
+Plug 'itchyny/lightline.vim'
 Plug 'liuchengxu/space-vim-dark'
 
 " File navigation
@@ -280,6 +279,14 @@ endif
 source ~/.config/nvim/_machine_specific.vim
 
 " ===================== Start of Plugin Settings =====================
+" ===
+" === lightline
+" ===
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
 
 " ===
 " === Dress up my vim
@@ -296,6 +303,7 @@ hi Comment guifg=#5C6370 ctermfg=59
 " 开启真彩色
 set termguicolors
 hi LineNr ctermbg=NONE guibg=NONE
+
 
 " ===
 " === AutoFormat
@@ -323,6 +331,7 @@ autocmd BufWritePost * GitGutter
 " ===
 noremap R :Ranger<CR>
 let g:ranger_map_keys = 0
+
 
 " ===
 " === coc
