@@ -283,6 +283,21 @@ source ~/.config/nvim/_machine_specific.vim
 
 " ===================== Start of Plugin Settings =====================
 " ===
+" === colorscheme
+" ===
+colorscheme space-vim-dark
+
+
+" ===
+" === lightline
+" ===
+set noshowmode
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ }
+
+
+" ===
 " === Dress up my vim
 " ===
 " 注释斜体
@@ -302,21 +317,6 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
-
-
-" ===
-" === colorscheme
-" ===
-colorscheme space-vim-dark
-
-
-" ===
-" === lightline
-" ===
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'wombat',
-      \ }
 
 
 " ===
