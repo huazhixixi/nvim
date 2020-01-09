@@ -169,11 +169,11 @@ noremap <Right> <C-w>l
 " ===
 " === Tab management
 " ===
-noremap tt :tabe<CR>
-noremap th :-tabnext<CR>
-noremap tl :+tabnext<CR>
-noremap tmh :-tabmove<CR>
-noremap tml :+tabmove<CR>
+noremap stt :tabe<CR>
+noremap sth :-tabnext<CR>
+noremap stl :+tabnext<CR>
+noremap stmh :-tabmove<CR>
+noremap stml :+tabmove<CR>
 
 
 " ===
@@ -261,6 +261,9 @@ Plug 'Chiel92/vim-autoformat'
 Plug 'cohama/lexima.vim'
 Plug 'rlue/vim-barbaric'
 
+" Vim Applications
+Plug 'itchyny/calendar.vim'
+
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
@@ -284,7 +287,7 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'wombat',
       \ }
 
 
@@ -492,6 +495,13 @@ let g:go_highlight_variable_assignments      = 0
 let g:go_highlight_variable_declarations     = 0
 let g:go_doc_keywordprg_enabled              = 0
 
+
+" ===
+" === vim-calendar
+" ===
+noremap \\ :Calendar -first_day=monday<CR>
+noremap \cc :Calendar -view=clock<CR>
+noremap \cy :Calendar -view=year<CR>
 
 " ===================== End of Plugin Settings =====================
 
