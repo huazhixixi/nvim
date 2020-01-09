@@ -230,6 +230,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 
 " File navigation
+Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -265,10 +266,14 @@ Plug 'cohama/lexima.vim'
 Plug 'rlue/vim-barbaric'
 
 " Vim Applications
+Plug 'mhinz/vim-startify'
 Plug 'itchyny/calendar.vim'
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
+
+" Other
+Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -318,6 +323,18 @@ hi Comment guifg=#5C6370 ctermfg=59
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
+
+
+" ===
+" === Startify
+" ===
+noremap <LEADER>st :Startify<CR>
+
+
+" ===
+" === nerdtree
+" ===
+map <LEADER>tt :NERDTreeToggle<CR>
 
 
 " ===
