@@ -30,6 +30,7 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
+syntax on
 set hidden
 set number
 set relativenumber
@@ -224,7 +225,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
 Plug 'itchyny/lightline.vim'
-Plug 'liuchengxu/space-vim-dark'
+"Plug 'ajmwagar/vim-deus'
+"Plug 'ayu-theme/ayu-vim'
+Plug 'joshdick/onedark.vim'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -285,7 +288,14 @@ source ~/.config/nvim/_machine_specific.vim
 " ===
 " === colorscheme
 " ===
-colorscheme space-vim-dark
+" 开启真彩色
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+set termguicolors
+set background=dark
+"let ayucolor="light"
+"let ayucolor="mirage"
+"let ayucolor="dark"
+colorscheme onedark
 
 
 " ===
@@ -293,7 +303,7 @@ colorscheme space-vim-dark
 " ===
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'onedark'
       \ }
 
 
@@ -308,15 +318,6 @@ hi Comment guifg=#5C6370 ctermfg=59
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
-" 开启真彩色
-if (empty($TMUX))
-  if (has("nvim"))
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 
 
 " ===
