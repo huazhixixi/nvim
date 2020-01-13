@@ -230,7 +230,7 @@ Plug 'itchyny/lightline.vim'
 Plug 'joshdick/onedark.vim'
 
 " File navigation
-Plug 'preservim/nerdtree'
+"Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -266,14 +266,14 @@ Plug 'cohama/lexima.vim'
 Plug 'rlue/vim-barbaric'
 
 " Vim Applications
-Plug 'mhinz/vim-startify'
+"Plug 'mhinz/vim-startify'
 Plug 'itchyny/calendar.vim'
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 " Other
-Plug 'ryanoasis/vim-devicons'
+"Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -328,13 +328,13 @@ hi Comment guifg=#5C6370 ctermfg=59
 " ===
 " === Startify
 " ===
-noremap <LEADER>st :Startify<CR>
+"noremap <LEADER>st :Startify<CR>
 
 
 " ===
 " === nerdtree
 " ===
-map <LEADER>tt :NERDTreeToggle<CR>
+"map <LEADER>tt :NERDTreeToggle<CR>
 
 
 " ===
@@ -383,8 +383,8 @@ function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" Use C-c k to show documentation in preview window
-nnoremap <silent> <C-c>k :call <SID>show_documentation()<CR>
+" Use C-x k to show documentation in preview window
+nnoremap <silent> <C-x>k :call <SID>show_documentation()<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
