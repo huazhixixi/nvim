@@ -224,10 +224,9 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-Plug 'itchyny/lightline.vim'
-"Plug 'ajmwagar/vim-deus'
+Plug 'liuchengxu/eleline.vim'
+Plug 'bling/vim-bufferline'
 Plug 'ayu-theme/ayu-vim'
-"Plug 'joshdick/onedark.vim'
 
 " File navigation
 "Plug 'preservim/nerdtree'
@@ -245,6 +244,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
+Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
 
 " Error checking
