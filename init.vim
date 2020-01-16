@@ -411,7 +411,7 @@ let g:mkdp_page_title = '「${name}」'
 " ===
 " === vim-table-mode
 " ===
-noremap <LEADER>tm :TableModeToggle<CR>
+noremap <LEADER>mtm :TableModeToggle<CR>
 "let g:table_mode_disable_mappings = 1
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
@@ -542,6 +542,8 @@ let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
 let g:go_doc_keywordprg_enabled              = 0
+noremap <LEADER>tga :GoTest<CR>
+noremap <LEADER>tgg :GoTestFunc<CR>
 
 
 " ===
