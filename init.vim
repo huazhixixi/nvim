@@ -229,7 +229,6 @@ Plug 'bling/vim-bufferline'
 Plug 'ayu-theme/ayu-vim'
 
 " File navigation
-"Plug 'preservim/nerdtree'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
@@ -245,7 +244,10 @@ Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
-Plug 'chrisbra/Colorizer' " Show colors with :ColorHighlight
+Plug 'chrisbra/Colorizer'
+
+" Taglist
+Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
 
 " Error checking
 Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
@@ -258,22 +260,15 @@ Plug 'dkarter/bullets.vim'
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
-" Formatter
-Plug 'Chiel92/vim-autoformat'
-
 " Editor Enhancement
-Plug 'cohama/lexima.vim'
-Plug 'rlue/vim-barbaric'
+Plug 'cohama/lexima.vim' "自动关闭括号
+Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
 
 " Vim Applications
-"Plug 'mhinz/vim-startify'
-Plug 'itchyny/calendar.vim'
+Plug 'itchyny/calendar.vim' "日历app
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
-
-" Other
-"Plug 'ryanoasis/vim-devicons'
 
 call plug#end()
 
@@ -304,15 +299,6 @@ colorscheme ayu
 
 
 " ===
-" === lightline
-" ===
-set noshowmode
-let g:lightline = {
-      \ 'colorscheme': 'ayu_mirage'
-      \ }
-
-
-" ===
 " === Dress up my vim
 " ===
 " 注释斜体
@@ -323,24 +309,6 @@ hi Comment guifg=#5C6370 ctermfg=59
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
-
-
-" ===
-" === Startify
-" ===
-"noremap <LEADER>st :Startify<CR>
-
-
-" ===
-" === nerdtree
-" ===
-"map <LEADER>tt :NERDTreeToggle<CR>
-
-
-" ===
-" === AutoFormat
-" ===
-nnoremap \f :Autoformat<CR>
 
 
 " ===
@@ -479,6 +447,26 @@ command! -bang -nargs=* Ag
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:50%', '?'),
             \   <bang>0)
+
+
+" ===
+" === Vista.vim
+" ===
+noremap <silent> T :Vista!!<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'ctags'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+function! NearestMethodOrFunction() abort
+	return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+set statusline+=%{NearestMethodOrFunction()}
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+
 
 " ===
 " === vim-bookmarks
