@@ -241,6 +241,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
 Plug 'airblade/vim-gitgutter'
+Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
