@@ -114,8 +114,6 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " Disable the default s key
 noremap s <nop>
-noremap <C-c> <nop>
-noremap <C-s> <nop>
 noremap <C-x> <nop>
 
 " Set <LEADER> as <SPACE>, ; as :
@@ -241,7 +239,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
 Plug 'airblade/vim-gitgutter'
-Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] }
+Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -419,11 +417,11 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <C-c>i :ProjectFiles<CR>
-noremap <C-c>s :Ag<CR>
-noremap <C-c>l :Quickfix!<CR>
-noremap <C-s>  :LinesWithPreview<CR>
-noremap <C-x>b :Buffers<CR>
+noremap <LEADER>spf :ProjectFiles<CR>
+noremap <LEADER>sps :Ag<CR>
+noremap <LEADER>se  :Quickfix!<CR>
+noremap <LEADER>ss  :LinesWithPreview<CR>
+noremap <LEADER>bb  :Buffers<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
