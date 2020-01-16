@@ -124,11 +124,9 @@ noremap q :q!<CR>
 noremap Q :q!<CR>
 noremap w :w<CR>
 noremap W :w<CR>
-noremap x :wq<CR>
-noremap X :wq<CR>
 
 " Open the vimrc file anytime
-noremap <LEADER>oi :e ~/.config/nvim/init.vim<CR>
+noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open up lazygit
 noremap <LEADER>lg :term lazygit<CR>
@@ -141,7 +139,8 @@ noremap <silent> K 5k
 noremap <silent> J 5j
 noremap <silent> H 5b
 noremap <silent> L 5w
-
+noremap <silent> <C-h> 0
+noremap <silent> <C-l> $
 
 " ===
 " === Window management
@@ -239,7 +238,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
 Plug 'airblade/vim-gitgutter'
-Plug 'theniceboy/vim-gitignore', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
+Plug 'rdolgushin/gitignore.vim', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -256,18 +255,33 @@ Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim'
 
+" HTML, CSS, JavaScript, JSON, etc.
+Plug 'leshill/vim-json' "JSON语法高亮
+Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "CSS语法支持
+Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "JavaScript语法高亮和改进缩进
+Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "更强的JavaScript和Flow.js语法高亮和突出显示插件
+Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "React语法高亮和缩进插件
+Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "增强JavaScript语法文件
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+
+" Python
+Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] } "python缩进插件
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示插件
+Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
 
 " Editor Enhancement
 Plug 'cohama/lexima.vim' "自动关闭括号
 Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
+Plug 'preservim/nerdcommenter' "快速注释插件
 
 " Vim Applications
 Plug 'itchyny/calendar.vim' "日历app
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
+Plug 'marcweber/vim-addon-mw-utils' "可能snippets会用到,它是vim-snipmate的依赖项目
 
 call plug#end()
 
@@ -331,6 +345,11 @@ autocmd BufWritePost * GitGutter
 noremap R :Ranger<CR>
 let g:ranger_map_keys = 0
 
+
+" ===
+" === Python-syntax
+" ===
+let g:python_highlight_all = 1
 
 " ===
 " === coc
@@ -446,6 +465,13 @@ command! -bang -nargs=* Ag
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:50%', '?'),
             \   <bang>0)
+
+
+" ===
+" === Nerdcommenter
+" ===
+let g:NERDCommentEmptyLines = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 
 " ===
