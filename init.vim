@@ -208,7 +208,7 @@ func! CompileRunGcc()
     elseif &filetype == 'sh'
         :!time bash %
     elseif &filetype == 'html'
-        silent! exec "!chromium % &"
+        silent! exec "!".g:mkdp_browser." % &"
     elseif &filetype == 'go'
         set splitbelow
         :sp
