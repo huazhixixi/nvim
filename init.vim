@@ -121,7 +121,7 @@ let mapleader=" "
 
 " Save & quit
 noremap q :q!<CR>
-noremap Q :q!<CR>
+noremap Q :qa!<CR>
 noremap w :w<CR>
 noremap W :w<CR>
 
