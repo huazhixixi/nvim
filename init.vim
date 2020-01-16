@@ -238,9 +238,6 @@ Plug 'francoiscabrol/ranger.vim'
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-" Undo Tree
-Plug 'mbbill/undotree'
-
 " Git
 Plug 'airblade/vim-gitgutter'
 
@@ -479,24 +476,6 @@ command! -bang -nargs=* Ag
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:50%', '?'),
             \   <bang>0)
-
-
-" ===
-" === Undotree
-" ===
-noremap U :UndotreeToggle<CR>
-let g:undotree_DiffAutoOpen = 1
-let g:undotree_SetFocusWhenToggle = 1
-let g:undotree_ShortIndicators = 1
-let g:undotree_WindowLayout = 2
-let g:undotree_DiffpanelHeight = 8
-let g:undotree_SplitWidth = 24
-function g:Undotree_CustomMap()
-    nmap <buffer> k <plug>UndotreeNextState
-    nmap <buffer> j <plug>UndotreePreviousState
-    nmap <buffer> K 5<plug>UndotreeNextState
-    nmap <buffer> J 5<plug>UndotreePreviousState
-endfunc
 
 
 " ===
