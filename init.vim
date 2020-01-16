@@ -528,8 +528,6 @@ let g:go_highlight_string_spellcheck         = 1
 let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
-let g:go_highlight_variable_assignments      = 0
-let g:go_highlight_variable_declarations     = 0
 let g:go_doc_keywordprg_enabled              = 0
 
 
