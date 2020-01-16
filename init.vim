@@ -226,8 +226,8 @@ call plug#begin('~/.config/nvim/plugged')
 " Pretty Dress
 Plug 'itchyny/lightline.vim'
 "Plug 'ajmwagar/vim-deus'
-"Plug 'ayu-theme/ayu-vim'
-Plug 'joshdick/onedark.vim'
+Plug 'ayu-theme/ayu-vim'
+"Plug 'joshdick/onedark.vim'
 
 " File navigation
 "Plug 'preservim/nerdtree'
@@ -296,8 +296,8 @@ set termguicolors
 set background=dark
 "let ayucolor="light"
 "let ayucolor="mirage"
-"let ayucolor="dark"
-colorscheme onedark
+let ayucolor="dark"
+colorscheme ayu
 
 
 " ===
@@ -305,7 +305,7 @@ colorscheme onedark
 " ===
 set noshowmode
 let g:lightline = {
-      \ 'colorscheme': 'onedark'
+      \ 'colorscheme': 'ayu_mirage'
       \ }
 
 
