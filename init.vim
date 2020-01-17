@@ -180,6 +180,9 @@ noremap stml :+tabmove<CR>
 " Opening a terminal window
 noremap <LEADER>/ :term<CR>
 
+" Press space twice to jump to the next '<++>' and edit it
+noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
+
 " find and replace
 noremap \s :%s//g<left><left>
 
