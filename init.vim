@@ -279,7 +279,7 @@ Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示
 Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
 
 " Editor Enhancement
-Plug 'cohama/lexima.vim' "自动关闭括号
+Plug 'jiangmiao/auto-pairs' "自动配对括号等
 Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
 Plug 'preservim/nerdcommenter' "快速注释插件
 
