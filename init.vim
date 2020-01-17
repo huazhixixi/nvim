@@ -230,6 +230,10 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 
+" Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
 " Auto Complete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
@@ -416,6 +420,14 @@ noremap <LEADER>mtm :TableModeToggle<CR>
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
 " ===
+" === Markdown Settings
+" ===
+" Snippets
+source ~/.config/nvim/md-snippets.vim
+" auto spell
+autocmd BufRead,BufNewFile *.md setlocal spell
+
+" ===
 " === Bullets.vim
 " ===
 "let g:bullets_set_mappings = 0
@@ -468,6 +480,16 @@ command! -bang -nargs=* Ag
 
 
 " ===
+" === Ultisnips
+" ===
+inoremap <c-n> <nop>
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
+
+
+" ===
 " === Nerdcommenter
 " ===
 let g:NERDCommentEmptyLines = 1
@@ -506,7 +528,7 @@ nmap mC <Plug>BookmarkClear
 nmap mX <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
 nmap me <Plug>BookmarkMoveDown
-nmap <Leader>g <Plug>BookmarkMoveToLine
+nmap <LEADER>g <Plug>BookmarkMoveToLine
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_manage_per_buffer = 1
@@ -541,9 +563,9 @@ let g:go_highlight_string_spellcheck         = 1
 let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
-let g:go_doc_keywordprg_enabled              = 0
-noremap <LEADER>tga :GoTest<CR>
-noremap <LEADER>tgg :GoTestFunc<CR>
+autocmd FileType go noremap gk :GoDoc<CR>
+autocmd FileType go noremap ta :GoTest<CR>
+autocmd FileTYpe go noremap tt :GoTestFunc<CR>
 
 
 " ===
