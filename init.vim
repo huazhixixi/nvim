@@ -362,7 +362,7 @@ let g:python_highlight_all = 1
 " === coc
 " ===
 silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-yank', 'coc-phpls', 'coc-lists']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-snippets', 'coc-gitignore', 'coc-stylelint', 'coc-explorer', 'coc-translator', 'coc-markmap']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
@@ -386,6 +386,13 @@ function! s:show_documentation()
     endif
 endfunction
 " Useful commands
+" coc-explorer
+nmap tt :CocCommand explorer<CR>
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
+" coc-markmap
+nmap <LEADER>mm <Plug>(coc-markmap-create)
+" coc-yank
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 
 
@@ -568,8 +575,8 @@ let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
 autocmd FileType go noremap gk :GoDoc<CR>
-autocmd FileType go noremap ta :GoTest<CR>
-autocmd FileTYpe go noremap tt :GoTestFunc<CR>
+autocmd FileType go noremap gta :GoTest<CR>
+autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
 
 
 " ===
