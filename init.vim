@@ -116,8 +116,8 @@ noremap <C-x> <nop>
 let mapleader=" "
 
 " Save & quit
-noremap q :q<CR>
-noremap Q :qa<CR>
+noremap q :q!<CR>
+noremap Q :qa!<CR>
 noremap w :w<CR>
 noremap W :w<CR>
 
@@ -357,7 +357,7 @@ let g:python_highlight_all = 1
 " ===
 " === coc
 " ===
-silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
+"silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-snippets', 'coc-gitignore', 'coc-stylelint', 'coc-explorer', 'coc-translator', 'coc-markmap']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -367,11 +367,22 @@ inoremap <silent><expr> <TAB>
             \ pumvisible() ? "\<C-n>" :
             \ <SID>check_back_space() ? "\<TAB>" :
             \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 function! s:check_back_space() abort
     let col = col('.') - 1
     return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+" use <c-space>for trigger completion
+inoremap <silent><expr> <c-space> coc#refresh()
+" Use <cr> to confirm completion
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Use <Tab> and <S-Tab> to navigate the completion list:
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 " Use C-x k to show documentation in preview window
 nnoremap <silent> <C-x>k :call <SID>show_documentation()<CR>
 function! s:show_documentation()
