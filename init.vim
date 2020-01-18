@@ -22,7 +22,7 @@ endif
 " ===
 " === System
 " ===
-set clipboard=unnamed
+"set clipboard=unnamed
 let &t_ut=''
 set autochdir
 
@@ -30,8 +30,6 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
-syntax on
-set hidden
 set number
 set relativenumber
 set cursorline
@@ -65,8 +63,6 @@ set formatoptions-=tc
 set splitright
 set splitbelow
 set noshowmode
-set signcolumn=yes
-set cmdheight=2
 set shortmess+=c
 set inccommand=split
 set ttyfast "should make scrolling faster
@@ -120,8 +116,8 @@ noremap <C-x> <nop>
 let mapleader=" "
 
 " Save & quit
-noremap q :q!<CR>
-noremap Q :qa!<CR>
+noremap q :q<CR>
+noremap Q :qa<CR>
 noremap w :w<CR>
 noremap W :w<CR>
 
