@@ -307,10 +307,10 @@ source ~/.config/nvim/_machine_specific.vim
 " 开启真彩色
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-set background=dark
+"set background=dark
 "let ayucolor="light"
-"let ayucolor="mirage"
-let ayucolor="dark"
+let ayucolor="mirage"
+"let ayucolor="dark"
 colorscheme ayu
 
 
@@ -322,9 +322,9 @@ hi Comment cterm=italic
 " 灰色注释
 hi Comment guifg=#5C6370 ctermfg=59
 " 背景透明
-"hi Normal     ctermbg=NONE guibg=NONE
-"hi LineNr     ctermbg=NONE guibg=NONE
-"hi SignColumn ctermbg=NONE guibg=NONE
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 
 
 " ===
