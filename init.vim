@@ -125,7 +125,7 @@ noremap W :w<CR>
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open up lazygit
-noremap <LEADER>lg :term lazygit<CR>
+noremap <LEADER>g :term lazygit<CR>
 
 
 " ===
@@ -546,7 +546,7 @@ nmap mC <Plug>BookmarkClear
 nmap mX <Plug>BookmarkClearAll
 nmap mu <Plug>BookmarkMoveUp
 nmap me <Plug>BookmarkMoveDown
-nmap <LEADER>g <Plug>BookmarkMoveToLine
+"nmap <LEADER>g <Plug>BookmarkMoveToLine
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
 let g:bookmark_manage_per_buffer = 1
