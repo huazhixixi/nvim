@@ -135,7 +135,7 @@ noremap <silent> K 5k
 noremap <silent> J 5j
 noremap <silent> H 5b
 noremap <silent> L 5w
-noremap <silent> <C-h> 0
+noremap <silent> <C-h> ^
 noremap <silent> <C-l> $
 
 " ===
