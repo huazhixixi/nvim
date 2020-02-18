@@ -22,7 +22,7 @@ endif
 " ===
 " === System
 " ===
-"set clipboard=unnamed
+set clipboard=unnamed
 let &t_ut=''
 set autochdir
 
@@ -590,6 +590,13 @@ autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
 " ===
 " === vim-calendar
 " ===
+" E open Event list
+" T open Task list
+" D flag delete
+" dd flag delete
+" L delete is flag task
+" U undo
+" a\i\o add task or event
 noremap \\ :Calendar -first_day=monday<CR>
 noremap \cc :Calendar -view=clock<CR>
 noremap \cy :Calendar -view=year<CR>
