@@ -22,7 +22,7 @@ endif
 " ===
 " === System
 " ===
-set clipboard=unnamed
+"set clipboard=unnamed
 let &t_ut=''
 set autochdir
 
@@ -284,7 +284,6 @@ Plug 'itchyny/calendar.vim' "日历app
 
 " Dependencies
 Plug 'rbgrouleff/bclose.vim' " For ranger.vim
-Plug 'marcweber/vim-addon-mw-utils' "可能snippets会用到,它是vim-snipmate的依赖项目
 
 call plug#end()
 
@@ -376,8 +375,8 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " Use <cr> to confirm completion
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
 " Use <Tab> and <S-Tab> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
@@ -501,9 +500,13 @@ command! -bang -nargs=* Ag
 " ===
 inoremap <c-j> <nop>
 inoremap <c-k> <nop>
-let g:UltiSnipsExpandTrigger="<c-j>"
+"" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
 
 
