@@ -248,7 +248,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer'
 
 " Taglist
-Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
+Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息 (舍弃原因: 经常卡死)
 
 " Error checking
 Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
@@ -306,7 +306,7 @@ source ~/.config/nvim/_machine_specific.vim
 " 开启真彩色
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-"set background=dark
+set background=dark
 "let ayucolor="light"
 let ayucolor="mirage"
 "let ayucolor="dark"
@@ -530,7 +530,7 @@ let g:vista#renderer#icons = {
 \   "variable": "\uf71b",
 \  }
 function! NearestMethodOrFunction() abort
-	return get(b:, 'vista_nearest_method_or_function', '')
+    return get(b:, 'vista_nearest_method_or_function', '')
 endfunction
 set statusline+=%{NearestMethodOrFunction()}
 autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
