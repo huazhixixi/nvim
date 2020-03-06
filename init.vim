@@ -248,7 +248,7 @@ Plug 'jaxbot/semantic-highlight.vim'
 Plug 'chrisbra/Colorizer'
 
 " Taglist
-Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息 (舍弃原因: 经常卡死)
+Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
 
 " Error checking
 Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
