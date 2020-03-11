@@ -77,7 +77,7 @@ if has('persistent_undo')
     set undodir=~/.config/nvim/tmp/undo,.
 endif
 "set colorcolumn=80
-set updatetime=300
+set updatetime=1000
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -110,7 +110,6 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " Disable the default s key
 noremap s <nop>
-noremap <C-x> <nop>
 
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
@@ -227,7 +226,7 @@ Plug 'ayu-theme/ayu-vim'
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'francoiscabrol/ranger.vim'
+"Plug 'francoiscabrol/ranger.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -240,50 +239,50 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
-Plug 'airblade/vim-gitgutter'
-Plug 'rdolgushin/gitignore.vim', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
+"Plug 'airblade/vim-gitgutter'
+"Plug 'rdolgushin/gitignore.vim', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
 
 " Genreal Highlighter
-Plug 'jaxbot/semantic-highlight.vim'
-Plug 'chrisbra/Colorizer'
+"Plug 'jaxbot/semantic-highlight.vim'
+"Plug 'chrisbra/Colorizer'
 
 " Taglist
-Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
+"Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
 
 " Error checking
-Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+"Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-Plug 'dkarter/bullets.vim'
+Plug 'dkarter/bullets.vim' "Bullets.vim是一个用于自动生成项目符号的Vim插件
 
 " HTML, CSS, JavaScript, JSON, etc.
-Plug 'leshill/vim-json' "JSON语法高亮
-Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "CSS语法支持
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "JavaScript语法高亮和改进缩进
-Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "更强的JavaScript和Flow.js语法高亮和突出显示插件
-Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "React语法高亮和缩进插件
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "增强JavaScript语法文件
+"Plug 'leshill/vim-json' "JSON语法高亮
+"Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "CSS语法支持
+"Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "JavaScript语法高亮和改进缩进
+"Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "更强的JavaScript和Flow.js语法高亮和突出显示插件
+"Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "React语法高亮和缩进插件
+"Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "增强JavaScript语法文件
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python
-Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] } "python缩进插件
-Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示插件
-Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
+"Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] } "python缩进插件
+"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示插件
+"Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
 
 " Editor Enhancement
 Plug 'jiangmiao/auto-pairs' "自动配对括号等
-Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
+"Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
 Plug 'preservim/nerdcommenter' "快速注释插件
 
 " Vim Applications
 Plug 'itchyny/calendar.vim' "日历app
 
 " Dependencies
-Plug 'rbgrouleff/bclose.vim' " For ranger.vim
+"Plug 'rbgrouleff/bclose.vim' " For ranger.vim
 
 call plug#end()
 
@@ -329,23 +328,23 @@ hi Comment guifg=#5C6370 ctermfg=59
 " ===
 " === Colorizer
 " ===
-let g:colorizer_syntax = 1
+"let g:colorizer_syntax = 1
 
 
 " ==
 " == GitGutter
 " ==
-let g:gitgutter_map_keys = 0
-let g:gitgutter_override_sign_column_highlight = 0
-let g:gitgutter_preview_win_floating = 1
-autocmd BufWritePost * GitGutter
+"let g:gitgutter_map_keys = 0
+"let g:gitgutter_override_sign_column_highlight = 0
+"let g:gitgutter_preview_win_floating = 1
+"autocmd BufWritePost * GitGutter
 
 
 " ===
 " === Ranger.vim
 " ===
-noremap R :Ranger<CR>
-let g:ranger_map_keys = 0
+"noremap R :Ranger<CR>
+"let g:ranger_map_keys = 0
 
 
 " ===
@@ -357,33 +356,42 @@ let g:python_highlight_all = 1
 " === coc
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-snippets', 'coc-gitignore', 'coc-stylelint', 'coc-explorer', 'coc-translator', 'coc-markmap']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
+" other plugin before putting this into your config.
 inoremap <silent><expr> <TAB>
-            \ pumvisible() ? "\<C-n>" :
-            \ <SID>check_back_space() ? "\<TAB>" :
-            \ coc#refresh()
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
 function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~# '\s'
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
-" use <c-space>for trigger completion
+" Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
-" Use <cr> to confirm completion
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>"
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
+" position. Coc only does snippet and additional edit on confirm.
+if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 " Use <Tab> and <S-Tab> to navigate the completion list:
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-" Use C-x k to show documentation in preview window
-nnoremap <silent> <C-x>k :call <SID>show_documentation()<CR>
+" Use LEADER k to show documentation in preview window
+nnoremap <silent> <f1> :call <SID>show_documentation()<CR>
 function! s:show_documentation()
     if (index(['vim','help'], &filetype) >= 0)
         execute 'h '.expand('<cword>')
@@ -466,7 +474,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 noremap <LEADER>spf :ProjectFiles<CR>
 noremap <LEADER>sps :Ag<CR>
-noremap <LEADER>se  :Quickfix!<CR>
+"noremap <LEADER>se  :Quickfix!<CR>
 noremap <LEADER>ss  :LinesWithPreview<CR>
 noremap <LEADER>bb  :Buffers<CR>
 
@@ -498,12 +506,12 @@ command! -bang -nargs=* Ag
 " ===
 " === Ultisnips
 " ===
-inoremap <c-j> <nop>
-inoremap <c-k> <nop>
+inoremap <C-j> <nop>
+inoremap <C-k> <nop>
 "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -520,20 +528,20 @@ let g:NERDTrimTrailingWhitespace = 1
 " ===
 " === Vista.vim
 " ===
-noremap <silent> T :Vista!!<CR>
-let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-let g:vista_default_executive = 'ctags'
-let g:vista_fzf_preview = ['right:50%']
-let g:vista#renderer#enable_icon = 1
-let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
-function! NearestMethodOrFunction() abort
-    return get(b:, 'vista_nearest_method_or_function', '')
-endfunction
-set statusline+=%{NearestMethodOrFunction()}
-autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+"noremap <silent> T :Vista!!<CR>
+"let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+"let g:vista_default_executive = 'ctags'
+"let g:vista_fzf_preview = ['right:50%']
+"let g:vista#renderer#enable_icon = 1
+"let g:vista#renderer#icons = {
+"\   "function": "\uf794",
+"\   "variable": "\uf71b",
+"\  }
+"function! NearestMethodOrFunction() abort
+    "return get(b:, 'vista_nearest_method_or_function', '')
+"endfunction
+"set statusline+=%{NearestMethodOrFunction()}
+"autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
 " ===
