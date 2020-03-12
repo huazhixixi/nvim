@@ -1,6 +1,8 @@
 {
-    "suggest.noselect": true,
+    "suggest.noselect": false,
+    "yank.enableCompletion" : false,
     "python.jediEnabled": false,
+    "git.enableGutters": true,
     "git.addedSign.hlGroup": "GitGutterAdd",
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
