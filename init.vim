@@ -119,13 +119,14 @@ noremap q :q!<CR>
 noremap Q :qa!<CR>
 noremap w :w<CR>
 noremap W :w<CR>
+noremap x :wq<CR>
+inoremap .. <Esc><Esc>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 " Open up lazygit
 noremap <LEADER>g :term lazygit<CR>
-
 
 " ===
 " === Cursor Movement
@@ -153,10 +154,10 @@ noremap <LEADER>k <C-w>k
 noremap <LEADER>j <C-w>j
 noremap <LEADER>h <C-w>h
 noremap <LEADER>l <C-w>l
-noremap <Up> <C-w>k
-noremap <Down> <C-w>j
-noremap <Left> <C-w>h
-noremap <Right> <C-w>l
+noremap <Up> :res +5<CR>
+noremap <Down> :res -5<CR>
+noremap <Left> :vertical resize-5<CR>
+noremap <Right> :vertical resize+5<CR>
 
 
 " ===
@@ -472,7 +473,7 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <LEADER>spf :ProjectFiles<CR>
+noremap <LEADER>ff :ProjectFiles<CR>
 noremap <LEADER>sps :Ag<CR>
 "noremap <LEADER>se  :Quickfix!<CR>
 noremap <LEADER>ss  :LinesWithPreview<CR>
@@ -516,6 +517,7 @@ let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/UltiSnips/', 'UltiSnips']
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
 
 
 " ===
