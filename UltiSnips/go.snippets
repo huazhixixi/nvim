@@ -24,3 +24,9 @@ snippet fp "Println"
 fmt.Println(${1})${0}
 endsnippet
 
+
+snippet iferr "if err != nil" b
+if err != nil {
+	return err
+}
+endsnippet
