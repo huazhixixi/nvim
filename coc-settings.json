@@ -24,6 +24,10 @@
             "args": ["start"],
             "filetypes": ["sh"],
             "ignoredRootPaths": []
+        },
+        "vue": {
+            "command": "vls",
+            "filetypes": ["html", "js"]
         }
     }
 }
