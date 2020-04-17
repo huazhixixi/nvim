@@ -222,8 +222,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-Plug 'ajmwagar/vim-deus'
-"Plug 'ayu-theme/ayu-vim'
+Plug 'joshdick/onedark.vim'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -305,9 +304,10 @@ source ~/.config/nvim/_machine_specific.vim
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-colorscheme deus
-let g:airline_theme='deus'
+colorscheme onedark
+let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
 " ===
 " === Dress up my vim
