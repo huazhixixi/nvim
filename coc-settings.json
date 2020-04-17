@@ -27,7 +27,7 @@
         },
         "vue": {
             "command": "vls",
-            "filetypes": ["html", "js"]
+            "filetypes": ["html", "js", "vue"]
         }
     }
 }

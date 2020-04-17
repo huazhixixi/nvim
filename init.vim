@@ -218,9 +218,12 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-Plug 'liuchengxu/eleline.vim'
+"Plug 'liuchengxu/eleline.vim'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-Plug 'ayu-theme/ayu-vim'
+Plug 'ajmwagar/vim-deus'
+"Plug 'ayu-theme/ayu-vim'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -242,7 +245,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 "Plug 'rdolgushin/gitignore.vim', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
 
 " Genreal Highlighter
-"Plug 'jaxbot/semantic-highlight.vim'
+Plug 'jaxbot/semantic-highlight.vim'
 "Plug 'chrisbra/Colorizer'
 
 " Taglist
@@ -257,12 +260,9 @@ Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim' "Bullets.vim是一个用于自动生成项目符号的Vim插件
 
 " HTML, CSS, JavaScript, JSON, etc.
-"Plug 'leshill/vim-json' "JSON语法高亮
-"Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "CSS语法支持
-"Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "JavaScript语法高亮和改进缩进
-"Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "更强的JavaScript和Flow.js语法高亮和突出显示插件
-"Plug 'MaxMEllon/vim-jsx-pretty', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "React语法高亮和缩进插件
-"Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] } "增强JavaScript语法文件
+Plug 'elzr/vim-json'
+Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -305,19 +305,17 @@ source ~/.config/nvim/_machine_specific.vim
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
 set background=dark
-"let ayucolor="light"
-let ayucolor="mirage"
-"let ayucolor="dark"
-colorscheme ayu
-
+colorscheme deus
+let g:airline_theme='deus'
+let g:airline#extensions#tabline#enabled = 1
 
 " ===
 " === Dress up my vim
 " ===
 " 注释斜体
-hi Comment cterm=italic
+"hi Comment cterm=italic
 " 灰色注释
-hi Comment guifg=#5C6370 ctermfg=59
+"hi Comment guifg=#5C6370 ctermfg=59
 " 背景透明
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
@@ -327,7 +325,7 @@ hi Comment guifg=#5C6370 ctermfg=59
 " ===
 " === Colorizer
 " ===
-"let g:colorizer_syntax = 1
+let g:colorizer_syntax = 1
 
 
 " ==
