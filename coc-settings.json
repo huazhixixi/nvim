@@ -1,23 +1,71 @@
 {
-    "suggest.noselect": false,
-    "yank.enableCompletion" : false,
-    "python.jediEnabled": false,
+    "coc.preferences.hoverTarget": "preview",
+    "coc.preferences.enableFloatHighlight": true,
+    "coc.preferences.extensionUpdateCheck": "daily",
+    "coc.preferences.formatOnSaveFiletypes": [
+        "javascript",
+        "html",
+        "css",
+        "vue",
+        "python",
+        "go"
+    ],
+
     "git.enableGutters": true,
+    "git.addGBlameToBufferVar": true,
+    "git.addGBlameToVirtualText": true,
     "git.addedSign.hlGroup": "GitGutterAdd",
     "git.changedSign.hlGroup": "GitGutterChange",
     "git.removedSign.hlGroup": "GitGutterDelete",
     "git.topRemovedSign.hlGroup": "GitGutterDelete",
     "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+
+    "suggest.detailMaxLength": 60,
+    "suggest.noselect": false,
+    "suggest.enablePreselect": false,
+    "suggest.triggerAfterInsertEnter": false,
+    "suggest.timeout": 5000,
+    "suggest.enablePreview": true,
+    "suggest.floatEnable": true,
+    "suggest.detailField": "preview",
+    "suggest.snippetIndicator": "",
+    "suggest.triggerCompletionWait": 100,
+    "suggest.echodocSupport": true,
+
+    "diagnostic.signOffset": 1,
+    "diagnostic.errorSign": "×",
+    "diagnostic.warningSign": "»",
+    "diagnostic.infoSign": "ღ",
+    "diagnostic.hintSign": "ஐ",
+    "diagnostic.displayByAle": false,
+    "diagnostic.refreshOnInsertMode": false,
+    "diagnostic.refreshAfterSave": false,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+    "diagnostic.virtualText": true,
+
+    "explorer.width": 35,
+    "explorer.file.showHiddenFiles": true,
+    "explorer.icon.enableNerdfont": true,
+    "explorer.file.column.git.showIgnored": true,
+    "explorer.file.column.indent.indentLine": true,
+    "explorer.buffer.showHiddenBuffers": false,
+
+    "python.jediEnabled": false,
+    "python.formatting.provider": "autopep8",
+
+    "yank.enableCompletion" : false,
+
     "languageserver": {
         "golang": {
             "command": "gopls",
             "rootPatterns": ["go.mod"],
             "filetypes": ["go"],
             "initializationOptions": {
-				"gocodeCompletionEnabled": true,
-				"diagnosticsEnabled": true,
-				"lintTool": "golint"
-			}
+                "gocodeCompletionEnabled": true,
+                "diagnosticsEnabled": true,
+                "lintTool": "golint"
+            }
         },
         "bash": {
             "command": "bash-language-server",

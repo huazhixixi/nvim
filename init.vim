@@ -15,6 +15,16 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
+" ===
+" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
+" ===
+let has_machine_specific_file = 1
+if empty(glob('~/.config/nvim/_machine_specific.vim'))
+    let has_machine_specific_file = 0
+    silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+endif
+source ~/.config/nvim/_machine_specific.vim
+
 " ====================
 " === Editor Setup ===
 " ====================
@@ -218,7 +228,6 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-"Plug 'liuchengxu/eleline.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
@@ -227,7 +236,7 @@ Plug 'joshdick/onedark.vim'
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-"Plug 'francoiscabrol/ranger.vim'
+Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -240,18 +249,13 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
-"Plug 'airblade/vim-gitgutter'
-"Plug 'rdolgushin/gitignore.vim', { 'for': ['gitignore', 'vim-plug'] } "gitignore高亮
+Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
-"Plug 'chrisbra/Colorizer'
 
 " Taglist
-"Plug 'liuchengxu/vista.vim' "eleline作者开发的,可以显示标签列表,可以在状态栏显示一些信息
-
-" Error checking
-"Plug 'fszymanski/fzf-quickfix', {'on': 'Quickfix'}
+Plug 'liuchengxu/vista.vim' 
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
@@ -272,29 +276,14 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
 
 " Editor Enhancement
+Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
 Plug 'jiangmiao/auto-pairs' "自动配对括号等
-"Plug 'rlue/vim-barbaric' "好像是个自动切换输入法的插件
 Plug 'preservim/nerdcommenter' "快速注释插件
 
 " Vim Applications
 Plug 'itchyny/calendar.vim' "日历app
 
-" Dependencies
-"Plug 'rbgrouleff/bclose.vim' " For ranger.vim
-
 call plug#end()
-
-
-
-" ===
-" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
-" ===
-let has_machine_specific_file = 1
-if empty(glob('~/.config/nvim/_machine_specific.vim'))
-    let has_machine_specific_file = 0
-    silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
-endif
-source ~/.config/nvim/_machine_specific.vim
 
 " ===================== Start of Plugin Settings =====================
 " ===
@@ -327,21 +316,18 @@ let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安�
 " ===
 let g:colorizer_syntax = 1
 
-
 " ==
 " == GitGutter
 " ==
-"let g:gitgutter_map_keys = 0
-"let g:gitgutter_override_sign_column_highlight = 0
-"let g:gitgutter_preview_win_floating = 1
-"autocmd BufWritePost * GitGutter
-
-
-" ===
-" === Ranger.vim
-" ===
-"noremap R :Ranger<CR>
-"let g:ranger_map_keys = 0
+let g:gitgutter_signs = 0
+let g:gitgutter_map_keys = 0
+let g:gitgutter_override_sign_column_highlight = 0
+let g:gitgutter_preview_win_floating = 0
+autocmd BufWritePost * GitGutter
+nnoremap <LEADER>gf :GitGutterFold<CR>
+nnoremap H :GitGutterPreviewHunk<CR>
+nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
+nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 
 " ===
@@ -405,6 +391,10 @@ nmap ts <Plug>(coc-translator-p)
 nmap <LEADER>mm <Plug>(coc-markmap-create)
 " coc-yank
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 " ===
@@ -469,10 +459,9 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <LEADER>ff :ProjectFiles<CR>
-noremap <LEADER>sps :Ag<CR>
-"noremap <LEADER>se  :Quickfix!<CR>
-noremap <LEADER>ss  :LinesWithPreview<CR>
+noremap <LEADER>ff  :ProjectFiles<CR>
+noremap <LEADER>fs  :Lines<CR>
+noremap <LEADER>fps :Rg<CR>
 noremap <LEADER>bb  :Buffers<CR>
 
 autocmd! FileType fzf
@@ -526,20 +515,20 @@ let g:NERDTrimTrailingWhitespace = 1
 " ===
 " === Vista.vim
 " ===
-"noremap <silent> T :Vista!!<CR>
-"let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
-"let g:vista_default_executive = 'ctags'
-"let g:vista_fzf_preview = ['right:50%']
-"let g:vista#renderer#enable_icon = 1
-"let g:vista#renderer#icons = {
-"\   "function": "\uf794",
-"\   "variable": "\uf71b",
-"\  }
-"function! NearestMethodOrFunction() abort
-    "return get(b:, 'vista_nearest_method_or_function', '')
-"endfunction
-"set statusline+=%{NearestMethodOrFunction()}
-"autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+noremap <silent> T :Vista!!<CR>
+let g:vista_icon_indent = ["╰─▸ ", "├─▸ "]
+let g:vista_default_executive = 'ctags'
+let g:vista_fzf_preview = ['right:50%']
+let g:vista#renderer#enable_icon = 1
+let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+function! NearestMethodOrFunction() abort
+    return get(b:, 'vista_nearest_method_or_function', '')
+endfunction
+set statusline+=%{NearestMethodOrFunction()}
+autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 
 
 " ===
@@ -590,11 +579,17 @@ let g:go_highlight_string_spellcheck         = 1
 let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
-let g:go_doc_keywordprg_enabled              = 0
+let g:go_def_mapping_enabled = 0
 autocmd FileType go noremap gk :GoDoc<CR>
 autocmd FileType go noremap gta :GoTest<CR>
 autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
 
+" ===
+" === rnvimr
+" ===
+nnoremap <silent> <M-o> :RnvimrToggle<CR>
+tnoremap <silent> <M-o> <C-\><C-n>:RnvimrToggle<CR>
+let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
 
 " ===
 " === vim-calendar
