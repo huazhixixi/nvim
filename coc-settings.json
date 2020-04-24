@@ -3,10 +3,7 @@
     "coc.preferences.enableFloatHighlight": true,
     "coc.preferences.extensionUpdateCheck": "daily",
     "coc.preferences.formatOnSaveFiletypes": [
-        "javascript",
-        "html",
         "css",
-        "vue",
         "python",
         "go"
     ],
