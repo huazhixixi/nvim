@@ -579,7 +579,8 @@ let g:go_highlight_string_spellcheck         = 1
 let g:go_highlight_structs                   = 1
 let g:go_highlight_trailing_whitespace_error = 1
 let g:go_highlight_types                     = 1
-let g:go_def_mapping_enabled = 0
+let g:go_def_mapping_enabled                 = 0
+let g:go_doc_keywordprg_enabled              = 0
 autocmd FileType go noremap gk :GoDoc<CR>
 autocmd FileType go noremap gta :GoTest<CR>
 autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
