@@ -127,8 +127,8 @@ let mapleader=" "
 " Save & quit
 noremap q :q!<CR>
 noremap Q :qa!<CR>
-noremap w :w<CR>
-noremap W :w<CR>
+noremap w :w!<CR>
+noremap W :w!<CR>
 
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
