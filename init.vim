@@ -321,7 +321,6 @@ let g:colorizer_syntax = 1
 " ==
 let g:gitgutter_signs = 0
 let g:gitgutter_map_keys = 0
-let g:gitgutter_override_sign_column_highlight = 0
 let g:gitgutter_preview_win_floating = 0
 autocmd BufWritePost * GitGutter
 nnoremap <LEADER>gf :GitGutterFold<CR>

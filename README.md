@@ -15,6 +15,7 @@ git clone --depth 1 https://github.com/Wjinlei/nvim.git ~/.config/nvim
 - Install `nodejs` and do  `npm install -g neovim`
 - Install `nerd-fonts-complete` (actually it's optional but it looks real good)
 - Install `the_silver_searcher`
+- Install `ctags`
 
 ### After Installation, You Might Want To:
 Go:
