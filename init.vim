@@ -289,11 +289,10 @@ call plug#end()
 " ===
 " === colorscheme
 " ===
-" 开启真彩色
-let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 set termguicolors
-set background=dark
+syntax on
 colorscheme onedark
+let g:onedark_termcolors=256
 let g:airline_theme='onedark'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
