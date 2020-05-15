@@ -231,7 +231,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-Plug 'joshdick/onedark.vim'
+"Plug 'joshdick/onedark.vim'
+Plug 'ajmwagar/vim-deus'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -291,9 +292,9 @@ call plug#end()
 " ===
 set termguicolors
 syntax on
-colorscheme onedark
+colors deus
 let g:onedark_termcolors=256
-let g:airline_theme='onedark'
+let g:airline_theme='deus'
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
@@ -305,10 +306,9 @@ let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安�
 " 灰色注释
 "hi Comment guifg=#5C6370 ctermfg=59
 " 背景透明
-"hi Normal     ctermbg=NONE guibg=NONE
-"hi LineNr     ctermbg=NONE guibg=NONE
-"hi SignColumn ctermbg=NONE guibg=NONE
-
+hi Normal     ctermbg=NONE guibg=NONE
+hi LineNr     ctermbg=NONE guibg=NONE
+hi SignColumn ctermbg=NONE guibg=NONE
 
 " ===
 " === Colorizer
