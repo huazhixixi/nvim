@@ -282,6 +282,9 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 "Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示插件
 "Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
 
+" Debuger
+Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --enable-go --enable-bash'}
+
 " Editor Enhancement
 Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
 Plug 'jiangmiao/auto-pairs' "自动配对括号等
@@ -379,6 +382,21 @@ function g:Undotree_CustomMap()
     nmap <buffer> J 5<plug>UndotreePreviousState
 endfunc
 
+" vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+function! s:read_template_into_buffer(template)
+    " has to be a function to avoid the extra space fzf#run insers otherwise
+    execute '0r ~/.config/nvim/vimspector_json/'.a:template
+endfunction
+command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
+            \   'source': 'ls -1 ~/.config/nvim/vimspector_json',
+            \   'down': 20,
+            \   'sink': function('<sid>read_template_into_buffer')
+            \ })
+noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
+sign define vimspectorBP text=☛ texthl=Normal
+sign define vimspectorBPDisabled text=☞ texthl=Normal
+sign define vimspectorPC text=🔶 texthl=SpellBad
 
 " ===
 " === Python-syntax
