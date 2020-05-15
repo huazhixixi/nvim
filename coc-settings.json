@@ -51,7 +51,8 @@
     "python.jediEnabled": false,
     "python.formatting.provider": "autopep8",
 
-    "yank.enableCompletion" : false,
+    "yank.enableCompletion": false,
+    "todolist.promptForReminder": false,
 
     "languageserver": {
         "golang": {

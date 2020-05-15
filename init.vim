@@ -256,17 +256,23 @@ Plug 'airblade/vim-gitgutter'
 Plug 'jaxbot/semantic-highlight.vim'
 
 " Taglist
-Plug 'liuchengxu/vista.vim' 
+Plug 'liuchengxu/vista.vim'
+
+" Undo Tree
+Plug 'mbbill/undotree'
 
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 Plug 'dkarter/bullets.vim' "Bullets.vim是一个用于自动生成项目符号的Vim插件
+Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 
 " HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
+Plug 'othree/html5.vim'
 Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -280,9 +286,15 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
 Plug 'jiangmiao/auto-pairs' "自动配对括号等
 Plug 'preservim/nerdcommenter' "快速注释插件
+Plug 'Konfekt/FastFold' "自动代码折叠
 
 " Vim Applications
 Plug 'itchyny/calendar.vim' "日历app
+
+" Other
+Plug 'wincent/terminus'
+Plug 'luochen1990/rainbow'
+Plug 'mg979/vim-xtabline'
 
 call plug#end()
 
@@ -295,7 +307,7 @@ syntax on
 colors deus
 let g:onedark_termcolors=256
 let g:airline_theme='deus'
-let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
 " ===
@@ -306,9 +318,9 @@ let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安�
 " 灰色注释
 "hi Comment guifg=#5C6370 ctermfg=59
 " 背景透明
-hi Normal     ctermbg=NONE guibg=NONE
-hi LineNr     ctermbg=NONE guibg=NONE
-hi SignColumn ctermbg=NONE guibg=NONE
+"hi Normal     ctermbg=NONE guibg=NONE
+"hi LineNr     ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
 
 " ===
 " === Colorizer
@@ -327,6 +339,46 @@ nnoremap <LEADER>gh :GitGutterPreviewHunk<CR>
 nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
+" ===
+" === fastfold
+" ===
+nmap zuz <Plug>(FastFoldUpdate)
+let g:fastfold_savehook = 1
+let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
+let g:markdown_folding = 1
+let g:vimsyn_folding = 'af'
+let g:xml_syntax_folding = 1
+let g:javaScript_fold = 1
+let g:sh_fold_enabled= 7
+
+" ===
+" === xtabline
+" ===
+let g:xtabline_settings = {}
+let g:xtabline_settings.enable_mappings = 0
+let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
+let g:xtabline_settings.enable_persistance = 0
+let g:xtabline_settings.last_open_first = 1
+noremap to :XTabMode<CR>
+
+" ===
+" === Undotree
+" ===
+noremap U :UndotreeToggle<CR>
+let g:undotree_DiffAutoOpen = 1
+let g:undotree_SetFocusWhenToggle = 1
+let g:undotree_ShortIndicators = 1
+let g:undotree_WindowLayout = 2
+let g:undotree_DiffpanelHeight = 8
+let g:undotree_SplitWidth = 24
+function g:Undotree_CustomMap()
+    nmap <buffer> k <plug>UndotreeNextState
+    nmap <buffer> j <plug>UndotreePreviousState
+    nmap <buffer> K 5<plug>UndotreeNextState
+    nmap <buffer> J 5<plug>UndotreePreviousState
+endfunc
+
 
 " ===
 " === Python-syntax
@@ -337,7 +389,7 @@ let g:python_highlight_all = 1
 " === coc
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap', 'coc-vetur', 'coc-snippets', 'coc-tsserver', 'coc-emmet', 'coc-highlight']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap', 'coc-vetur', 'coc-snippets', 'coc-tsserver', 'coc-emmet', 'coc-highlight', 'coc-todolist']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
@@ -393,6 +445,9 @@ nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
+" coc-todolist
+nnoremap <leader>tn :CocCommand todolist.create<CR>
+nnoremap <leader>tl :CocList todolist<CR>
 
 
 " ===
@@ -447,6 +502,15 @@ let g:bullets_enabled_file_types = [
             \ 'scratch'
             \]
 
+" ===
+" === vim-markdown-toc, :GenToGFM 生成目录, :RmoveToc 删除目录, :UpdateToc 手动更新目录
+" ===
+let g:vmt_auto_update_on_save = 1
+let g:vmt_dont_insert_fence = 0
+let g:vmt_cycle_list_item_markers = 1
+let g:vmt_fence_text = 'TOC'
+let g:vmt_fence_closing_text = '/TOC'
+
 
 " ===
 " === FZF
@@ -457,10 +521,9 @@ function! s:find_git_root()
 endfunction
 command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap <LEADER>ff  :ProjectFiles<CR>
-noremap <LEADER>fs  :Lines<CR>
-noremap <LEADER>fps :Rg<CR>
-noremap <LEADER>bb  :Buffers<CR>
+noremap ff  :ProjectFiles<CR>
+noremap fs  :Rg<CR>
+noremap bb  :Buffers<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noruler
@@ -472,20 +535,6 @@ command! -bang -nargs=* Buffers
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:0%', '?'),
             \   <bang>0)
-
-command! -bang -nargs=* LinesWithPreview
-            \ call fzf#vim#grep(
-            \   'rg --with-filename --column --line-number --no-heading --color=always --smart-case --word-regexp . '.fnameescape(expand('%')), 1,
-            \   fzf#vim#with_preview({}, 'up:50%', '?'),
-            \   1)
-
-command! -bang -nargs=* Ag
-            \ call fzf#vim#ag(
-            \   '',
-            \   <bang>0 ? fzf#vim#with_preview('up:60%')
-            \           : fzf#vim#with_preview('right:50%', '?'),
-            \   <bang>0)
-
 
 " ===
 " === Ultisnips
