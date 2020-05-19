@@ -394,9 +394,9 @@ command! -bang -nargs=* LoadVimSpectorJsonTemplate call fzf#run({
             \   'sink': function('<sid>read_template_into_buffer')
             \ })
 noremap <leader>vs :tabe .vimspector.json<CR>:LoadVimSpectorJsonTemplate<CR>
-sign define vimspectorBP text=☛ texthl=Normal
-sign define vimspectorBPDisabled text=☞ texthl=Normal
-sign define vimspectorPC text=🔶 texthl=SpellBad
+sign define vimspectorBP text=🛑 texthl=Normal
+sign define vimspectorBPDisabled text=🚫 texthl=Normal
+sign define vimspectorPC text=👉 texthl=SpellBad
 
 " ===
 " === Python-syntax
