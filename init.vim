@@ -287,7 +287,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --en
 
 " Editor Enhancement
 Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
-Plug 'jiangmiao/auto-pairs' "自动配对括号等
+"Plug 'jiangmiao/auto-pairs' "自动配对括号等
 Plug 'preservim/nerdcommenter' "快速注释插件
 Plug 'Konfekt/FastFold' "自动代码折叠
 
