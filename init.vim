@@ -150,18 +150,18 @@ noremap <silent> <C-l> $
 " === Window management
 " ===
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
-noremap sk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
-noremap sj :set splitbelow<CR>:split<CR>
-noremap sh :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
-noremap sl :set splitright<CR>:vsplit<CR>
+noremap spk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+noremap spj :set splitbelow<CR>:split<CR>
+noremap sph :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+noremap spl :set splitright<CR>:vsplit<CR>
 noremap smv <C-w>t<C-w>K
 noremap smh <C-w>t<C-w>H
 " moving the cursor around windows
 noremap ss <C-w>w
-noremap <LEADER>k <C-w>k
-noremap <LEADER>j <C-w>j
-noremap <LEADER>h <C-w>h
-noremap <LEADER>l <C-w>l
+noremap sk <C-w>k
+noremap sj <C-w>j
+noremap sh <C-w>h
+noremap sl <C-w>l
 noremap <Up> :res +5<CR>
 noremap <Down> :res -5<CR>
 noremap <Left> :vertical resize-5<CR>
