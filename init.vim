@@ -289,7 +289,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --en
 Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
 "Plug 'jiangmiao/auto-pairs' "自动配对括号等
 Plug 'preservim/nerdcommenter' "快速注释插件
-Plug 'Konfekt/FastFold' "自动代码折叠
+"Plug 'Konfekt/FastFold' "自动代码折叠
 
 " Vim Applications
 Plug 'itchyny/calendar.vim' "日历app
@@ -343,17 +343,17 @@ nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
 nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 
 " ===
-" === fastfold
+" === fastfold , 实在不知道有什么用,所以禁用了
 " ===
-nmap zuz <Plug>(FastFoldUpdate)
-let g:fastfold_savehook = 1
-let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-let g:markdown_folding = 1
-let g:vimsyn_folding = 'af'
-let g:xml_syntax_folding = 1
-let g:javaScript_fold = 1
-let g:sh_fold_enabled= 7
+"nmap zuz <Plug>(FastFoldUpdate)
+"let g:fastfold_savehook = 1
+"let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
+"let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
+"let g:markdown_folding = 1
+"let g:vimsyn_folding = 'af'
+"let g:xml_syntax_folding = 1
+"let g:javaScript_fold = 1
+"let g:sh_fold_enabled= 7
 
 " ===
 " === xtabline
