@@ -560,13 +560,13 @@ let g:vmt_fence_closing_text = '/TOC'
 " ===
 " === FZF
 " ===
-" project root finder
-function! s:find_git_root()
-    return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-command! ProjectFiles execute 'Files' s:find_git_root()
+"function! s:find_git_root()
+    "return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+"endfunction
+"command! ProjectFiles execute 'Files' s:find_git_root()
 
-noremap ff  :ProjectFiles<CR>
+"noremap ff  :ProjectFiles<CR>
+noremap ff  :GFiles<CR>
 noremap fs  :Rg<CR>
 noremap fas :Ag<CR>
 noremap bb  :Buffers<CR>
