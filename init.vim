@@ -231,7 +231,6 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-"Plug 'joshdick/onedark.vim'
 Plug 'ajmwagar/vim-deus'
 
 " File navigation
@@ -264,35 +263,33 @@ Plug 'mbbill/undotree'
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() } }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
-Plug 'dkarter/bullets.vim' "Bullets.vim是一个用于自动生成项目符号的Vim插件
+Plug 'dkarter/bullets.vim'
 Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 
 " HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'othree/html5.vim'
-Plug 'hail2u/vim-css3-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'pangloss/vim-javascript', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
-Plug 'jelera/vim-javascript-syntax', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
+Plug 'alvan/vim-closetag'
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 " Python
-"Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] } "python缩进插件
-"Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'} "Python语义突出显示插件
-"Plug 'tweekmonster/braceless.vim' "Python折叠,智能缩进等
+Plug 'Vimjas/vim-python-pep8-indent', { 'for' :['python', 'vim-plug'] }
+Plug 'numirias/semshi', {'do': ':UpdateRemotePlugins'}
+Plug 'tweekmonster/braceless.vim'
 
 " Debuger
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --enable-go --enable-bash'}
 
 " Editor Enhancement
-Plug 'jwarby/antovim' " <LEADER>s\ 对当前光标下的单词取反义词
-"Plug 'jiangmiao/auto-pairs' "自动配对括号等
-Plug 'preservim/nerdcommenter' "快速注释插件
-"Plug 'Konfekt/FastFold' "自动代码折叠
+Plug 'jwarby/antovim' " <LEADER>s 对当前光标下的单词取反义词
+Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdcommenter'
+"Plug 'Konfekt/FastFold'
 
 " Vim Applications
-Plug 'itchyny/calendar.vim' "日历app
+Plug 'itchyny/calendar.vim'
 
 " Other
 Plug 'wincent/terminus'
@@ -399,6 +396,30 @@ sign define vimspectorBPDisabled text=🚫 texthl=Normal
 sign define vimspectorPC text=👉 texthl=SpellBad
 
 " ===
+" === vim-easymotion
+" ===
+let g:EasyMotion_do_mapping = 0
+let g:EasyMotion_do_shade = 0
+let g:EasyMotion_smartcase = 1
+" Move to {char}
+map  fc <Plug>(easymotion-bd-f)
+nmap fc <Plug>(easymotion-overwin-f)
+" Move to line
+map fl <Plug>(easymotion-bd-jk)
+nmap fl <Plug>(easymotion-overwin-line)
+" Move to word
+map  fw <Plug>(easymotion-bd-w)
+nmap fw <Plug>(easymotion-overwin-w)
+
+" ===
+" === vim-closetag
+" ===
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
+let g:closetag_filetypes = 'html,xhtml,phtml,vue'
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
+let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" ===
 " === Python-syntax
 " ===
 let g:python_highlight_all = 1
@@ -407,7 +428,7 @@ let g:python_highlight_all = 1
 " === coc
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap', 'coc-vetur', 'coc-snippets', 'coc-tsserver', 'coc-emmet', 'coc-highlight', 'coc-todolist']
+let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap', 'coc-vetur', 'coc-snippets', 'coc-tsserver', 'coc-emmet', 'coc-highlight', 'coc-todolist', 'coc-pairs']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
