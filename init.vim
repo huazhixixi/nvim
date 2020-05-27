@@ -328,6 +328,11 @@ let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安�
 " ===
 let g:colorizer_syntax = 1
 
+" ===
+" === rainbow
+" ===
+let g:rainbow_active = 1
+
 " ==
 " == GitGutter
 " ==
