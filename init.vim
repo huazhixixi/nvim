@@ -286,6 +286,7 @@ Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --en
 Plug 'jwarby/antovim' " <LEADER>s 对当前光标下的单词取反义词
 Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
+Plug 'lambdalisue/suda.vim' " 使用 :sudow 以root身份保存文件
 "Plug 'Konfekt/FastFold'
 
 " Vim Applications
@@ -418,6 +419,11 @@ let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
 let g:closetag_filetypes = 'html,xhtml,phtml,vue'
 let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
 let g:closetag_xhtml_filetypes = 'xhtml,jsx'
+
+" ===
+" === suda.vim
+" ===
+cnoreabbrev sudow w suda://%
 
 " ===
 " === Python-syntax
@@ -562,6 +568,7 @@ command! ProjectFiles execute 'Files' s:find_git_root()
 
 noremap ff  :ProjectFiles<CR>
 noremap fs  :Rg<CR>
+noremap fas :Ag<CR>
 noremap bb  :Buffers<CR>
 
 autocmd! FileType fzf
