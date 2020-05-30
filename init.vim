@@ -232,6 +232,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'ajmwagar/vim-deus'
+Plug 'sheerun/vim-polyglot'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -303,10 +304,12 @@ call plug#end()
 " ===
 " === colorscheme
 " ===
-set termguicolors
 syntax on
-colors deus
-let g:onedark_termcolors=256
+set t_Co=256
+set termguicolors
+set background=dark " Setting dark mode
+colorscheme deus
+let g:deus_termcolors=256
 let g:airline_theme='deus'
 "let g:airline#extensions#tabline#enabled = 1
 let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
