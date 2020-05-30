@@ -652,7 +652,7 @@ let g:bookmark_auto_close = 1
 let g:bookmark_location_list = 1
 highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
-"let g:bookmark_sign = '♥'
+let g:bookmark_sign = '🔖'
 let g:bookmark_highlight_lines = 1
 
 
