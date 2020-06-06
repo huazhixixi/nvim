@@ -141,8 +141,8 @@ noremap <LEADER>lg :term lazygit<CR>
 " ===
 noremap <silent> K 5k
 noremap <silent> J 5j
-noremap <silent> H 5b
-noremap <silent> L 5w
+noremap <silent> H b
+noremap <silent> L w
 noremap <silent> <C-h> ^
 noremap <silent> <C-l> $
 
