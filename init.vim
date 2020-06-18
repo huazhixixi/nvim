@@ -231,13 +231,16 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-Plug 'ajmwagar/vim-deus'
-Plug 'sheerun/vim-polyglot'
+"Plug 'ajmwagar/vim-deus'
+"Plug 'morhetz/gruvbox'
+"Plug 'sickill/vim-monokai'
+Plug 'ayu-theme/ayu-vim'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'pechorin/any-jump.vim'
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -272,6 +275,7 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 Plug 'elzr/vim-json'
 Plug 'othree/html5.vim'
 Plug 'alvan/vim-closetag'
+Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -289,6 +293,9 @@ Plug 'jwarby/antovim' " <LEADER>s 对当前光标下的单词取反义词
 Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
 Plug 'lambdalisue/suda.vim' " 使用 :sudow 以root身份保存文件
+Plug 'sheerun/vim-polyglot'
+Plug 'godlygeek/tabular'
+"Plug 'junegunn/vim-easy-align'
 "Plug 'Konfekt/FastFold'
 
 " Vim Applications
@@ -302,22 +309,26 @@ Plug 'mg979/vim-xtabline'
 call plug#end()
 
 " ===================== Start of Plugin Settings =====================
+
 " ===
-" === colorscheme
+" === deus theme
 " ===
-syntax on
-set t_Co=256
-set termguicolors
-set background=dark " Setting dark mode
-colorscheme deus
-let g:deus_termcolors=256
-let g:airline_theme='deus'
-"let g:airline#extensions#tabline#enabled = 1
-let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
+"let g:deus_termcolors=256
+
+" ===
+" === ayu theme
+" ===
+"let ayucolor="light"  " for light version of theme
+"let ayucolor="mirage" " for mirage version of theme
+let ayucolor="dark"   " for dark version of theme
 
 " ===
 " === Dress up my vim
 " ===
+syntax on
+set termguicolors
+set background=dark " Setting dark mode
+colorscheme ayu
 " 注释斜体
 "hi Comment cterm=italic
 " 灰色注释
@@ -326,6 +337,12 @@ let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安�
 "hi Normal     ctermbg=NONE guibg=NONE
 "hi LineNr     ctermbg=NONE guibg=NONE
 "hi SignColumn ctermbg=NONE guibg=NONE
+
+" ===
+" === airline
+" ===
+let g:airline_theme='ayu'
+let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
 " ===
 " === Colorizer
@@ -344,10 +361,15 @@ let g:gitgutter_signs = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_preview_win_floating = 0
 autocmd BufWritePost * GitGutter
-nnoremap <LEADER>gf :GitGutterFold<CR>
-nnoremap <LEADER>gh :GitGutterPreviewHunk<CR>
-nnoremap <LEADER>g- :GitGutterPrevHunk<CR>
-nnoremap <LEADER>g= :GitGutterNextHunk<CR>
+nnoremap gf :GitGutterFold<CR>
+nnoremap gh :GitGutterPreviewHunk<CR>
+nnoremap gk :GitGutterPrevHunk<CR>
+nnoremap gj :GitGutterNextHunk<CR>
+
+" ===
+" === tabular
+" ===
+vmap ga :Tabularize /
 
 " ===
 " === fastfold , 实在不知道有什么用,所以禁用了
@@ -363,7 +385,7 @@ nnoremap <LEADER>g= :GitGutterNextHunk<CR>
 "let g:sh_fold_enabled= 7
 
 " ===
-" === xtabline
+" === xtabline, 这个插件其实我也不清楚到底有什么实际作用
 " ===
 let g:xtabline_settings = {}
 let g:xtabline_settings.enable_mappings = 0
@@ -371,6 +393,13 @@ let g:xtabline_settings.tabline_modes = ['tabs', 'buffers']
 let g:xtabline_settings.enable_persistance = 0
 let g:xtabline_settings.last_open_first = 1
 noremap to :XTabMode<CR>
+
+" ===
+" === any-jump
+" ===
+nnoremap fj :AnyJump<CR>
+let g:any_jump_window_width_ratio  = 0.8
+let g:any_jump_window_height_ratio = 0.9
 
 " ===
 " === Undotree
@@ -389,7 +418,9 @@ function g:Undotree_CustomMap()
     nmap <buffer> J 5<plug>UndotreePreviousState
 endfunc
 
-" vimspector
+" ===
+" === vimspector
+" ===
 let g:vimspector_enable_mappings = 'HUMAN'
 function! s:read_template_into_buffer(template)
     " has to be a function to avoid the extra space fzf#run insers otherwise
@@ -637,15 +668,22 @@ autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
 " === vim-bookmarks
 " ===
 let g:bookmark_no_default_key_mappings = 1
+" 添加普通书签
 nmap mt <Plug>BookmarkToggle
+" 添加带描述的书签
 nmap ma <Plug>BookmarkAnnotate
+" 查看所有书签
 nmap ml <Plug>BookmarkShowAll
+" 跳转到下一个书签
 nmap mi <Plug>BookmarkNext
+" 跳转到上一个书签
 nmap mn <Plug>BookmarkPrev
+" 清除当前所有书签
 nmap mC <Plug>BookmarkClear
+" 清除所有书签
 nmap mX <Plug>BookmarkClearAll
-nmap mu <Plug>BookmarkMoveUp
-nmap me <Plug>BookmarkMoveDown
+"nmap mu <Plug>BookmarkMoveUp
+"nmap me <Plug>BookmarkMoveDown
 "nmap <LEADER>g <Plug>BookmarkMoveToLine
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_auto_save = 1
@@ -653,7 +691,7 @@ let g:bookmark_manage_per_buffer = 1
 let g:bookmark_save_per_working_dir = 1
 let g:bookmark_center = 1
 let g:bookmark_auto_close = 1
-let g:bookmark_location_list = 1
+let g:bookmark_location_list = 0
 highlight BookmarkSign ctermbg=NONE ctermfg=160
 highlight BookmarkLine ctermbg=194 ctermfg=NONE
 let g:bookmark_sign = '🔖'
@@ -700,7 +738,7 @@ let g:rnvimr_layout = { 'relative': 'editor',
             \ 'col': 0,
             \ 'row': 0,
             \ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 1.0, 'height': 1.0}]
+let g:rnvimr_presets = [{'width': 0.9, 'height': 0.9}]
 
 
 " ===
