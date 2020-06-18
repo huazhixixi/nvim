@@ -254,6 +254,7 @@ Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
+Plug 'RRethy/vim-illuminate'
 
 " Taglist
 Plug 'liuchengxu/vista.vim'
