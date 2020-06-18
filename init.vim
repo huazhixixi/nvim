@@ -300,6 +300,7 @@ Plug 'godlygeek/tabular'
 
 " Vim Applications
 Plug 'itchyny/calendar.vim'
+Plug 'mhinz/vim-startify'
 
 " Other
 Plug 'wincent/terminus'
@@ -354,9 +355,14 @@ let g:colorizer_syntax = 1
 " ===
 let g:rainbow_active = 1
 
-" ==
-" == GitGutter
-" ==
+" ===
+" ===
+" ===
+noremap <LEADER>st :Startify<CR>
+
+" ===
+" === GitGutter
+" ===
 let g:gitgutter_signs = 0
 let g:gitgutter_map_keys = 0
 let g:gitgutter_preview_win_floating = 0
