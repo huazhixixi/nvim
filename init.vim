@@ -231,10 +231,7 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
-"Plug 'ajmwagar/vim-deus'
-"Plug 'morhetz/gruvbox'
-"Plug 'sickill/vim-monokai'
-Plug 'ayu-theme/ayu-vim'
+Plug 'ajmwagar/vim-deus'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -256,7 +253,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 Plug 'airblade/vim-gitgutter'
 
 " Genreal Highlighter
-Plug 'jaxbot/semantic-highlight.vim'
+Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
 Plug 'RRethy/vim-illuminate'
 
 " Taglist
@@ -312,24 +309,11 @@ call plug#end()
 " ===================== Start of Plugin Settings =====================
 
 " ===
-" === deus theme
-" ===
-"let g:deus_termcolors=256
-
-" ===
-" === ayu theme
-" ===
-"let ayucolor="light"  " for light version of theme
-"let ayucolor="mirage" " for mirage version of theme
-let ayucolor="dark"   " for dark version of theme
-
-" ===
 " === Dress up my vim
 " ===
 syntax on
 set termguicolors
 set background=dark " Setting dark mode
-colorscheme ayu
 " 注释斜体
 "hi Comment cterm=italic
 " 灰色注释
@@ -340,9 +324,19 @@ colorscheme ayu
 "hi SignColumn ctermbg=NONE guibg=NONE
 
 " ===
+" === deus theme
+" ===
+let g:deus_termcolors=256
+
+" ===
+" === color theme
+" ===
+colorscheme deus
+
+" ===
 " === airline
 " ===
-let g:airline_theme='ayu'
+let g:airline_theme='deus'
 let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
 " ===
