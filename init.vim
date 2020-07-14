@@ -367,7 +367,7 @@ let g:rainbow_active = 1
 " ===
 " ===
 " ===
-noremap <LEADER>st :Startify<CR>
+noremap <LEADER>db :Startify<CR>
 
 " ===
 " === GitGutter
