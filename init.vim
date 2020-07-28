@@ -19,7 +19,6 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
 endif
 
 
-
 " ====================
 " === Editor Setup ===
 " ====================
@@ -86,7 +85,6 @@ set updatetime=1000
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
-
 " ===
 " === Terminal Behavior
 " ===
@@ -110,7 +108,6 @@ let g:terminal_color_13  = '#FF92D0'
 let g:terminal_color_14  = '#9AEDFE'
 
 
-
 " ===
 " === Basic Mappings
 " ===
@@ -130,7 +127,6 @@ noremap W :w!<CR>
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
 
-
 " ===
 " === Cursor Movement
 " ===
@@ -140,7 +136,6 @@ noremap <silent> H b
 noremap <silent> L w
 noremap <silent> <C-h> ^
 noremap <silent> <C-l> $
-
 
 
 " ===
@@ -220,9 +215,49 @@ func! CompileRunGcc()
     endif
 endfunc
 
-" experimental
-set lazyredraw
-set regexpengine=1
+
+" ===
+" === Install Plugins with Vim-Plug
+" ===
+call plug#begin('~/.config/nvim/plugged')
+
+Plug 'morhetz/gruvbox'
+Plug 'vim-airline/vim-airline'
+Plug 'lambdalisue/suda.vim' " 使用 :sudow 以root身份保存文件
+
+call plug#end()
+
+
+" ===================== Start of Plugin Settings =====================
+
+" ===
+" === theme
+" ===
+syntax on
+set background=dark " Setting dark mode
+"let g:gruvbox_contrast_dark = "soft"
+let g:gruvbox_contrast_dark = "medium"
+"let g:gruvbox_contrast_dark = "hard"
+let g:gruvbox_termcolors = 16
+colorscheme gruvbox
+" 注释斜体
+hi Comment cterm=italic
+" 灰色注释
+"hi Comment guifg=#5C6370 ctermfg=59
+" 背景透明
+"hi Normal     ctermbg=NONE guibg=NONE
+"hi LineNr     ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
+
+
+" ===
+" === airline
+" ===
+let g:airline_theme='gruvbox'
+let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
+
+
+" ===================== End of Plugin Settings =====================
 
 " ===
 " === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
@@ -234,20 +269,20 @@ if empty(glob('~/.config/nvim/_machine_specific.vim'))
 endif
 source ~/.config/nvim/_machine_specific.vim
 
+" Open the _machine_specific.vim file if it has just been created
+if has_machine_specific_file == 0
+	exec "e ~/.config/nvim/_machine_specific.vim"
+endif
 
 hi NonText ctermfg=gray guifg=grey10
 "hi SpecialKey ctermfg=blue guifg=grey70
 
-" ===================== Start of Plugin Settings =====================
 
 " ===
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
 
-
-" Open the _machine_specific.vim file if it has just been created
-if has_machine_specific_file == 0
-	exec "e ~/.config/nvim/_machine_specific.vim"
-endif
-
+" experimental
+set lazyredraw
+set regexpengine=1
