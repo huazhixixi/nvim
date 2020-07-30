@@ -217,6 +217,7 @@ endfunc
 " ===
 call plug#begin('~/.config/nvim/plugged')
 
+"Plug 'ajmwagar/vim-deus'
 Plug 'doums/darcula'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -248,6 +249,7 @@ if (empty($TMUX))
 endif
 syntax on
 set background=dark " Setting dark mode
+"colorscheme deus
 colorscheme darcula
 
 
@@ -255,6 +257,7 @@ colorscheme darcula
 " === lightline
 " ===
 let g:lightline = { 'colorscheme': 'darculaOriginal' }
+"let g:lightline = { 'colorscheme': 'deus' }
 
 
 " ===
@@ -275,7 +278,6 @@ let g:coc_global_extensions = [
             \ 'coc-git',
             \ 'coc-gitignore',
             \ 'coc-explorer',
-            \ 'coc-translator',
             \ 'coc-snippets',
             \ 'coc-highlight',
             \ 'coc-pairs']
@@ -330,8 +332,6 @@ endfunction
 " Useful commands
 " coc-explorer
 nmap tt :CocCommand explorer<CR>
-" coc-translator
-nmap ts <Plug>(coc-translator-p)
 " coc-yank
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 " Highlight the symbol and its references when holding the cursor.
