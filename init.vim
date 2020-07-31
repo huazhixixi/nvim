@@ -6,6 +6,7 @@
 
 " Author: fock of @theniceboy with my private modifiactons
 
+
 " ===
 " === Auto load for first time uses
 " ===
@@ -15,19 +16,11 @@ if empty(glob('~/.config/nvim/autoload/plug.vim'))
     autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-" ===
-" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
-" ===
-let has_machine_specific_file = 1
-if empty(glob('~/.config/nvim/_machine_specific.vim'))
-    let has_machine_specific_file = 0
-    silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
-endif
-source ~/.config/nvim/_machine_specific.vim
 
 " ====================
 " === Editor Setup ===
 " ====================
+
 
 " ===
 " === System
@@ -77,6 +70,7 @@ set shortmess+=c
 set inccommand=split
 set ttyfast "should make scrolling faster
 set lazyredraw "same as above
+set regexpengine=1
 set visualbell
 silent !mkdir -p ~/.config/nvim/tmp/backup
 silent !mkdir -p ~/.config/nvim/tmp/undo
@@ -86,7 +80,7 @@ if has('persistent_undo')
     set undofile
     set undodir=~/.config/nvim/tmp/undo,.
 endif
-"set colorcolumn=80
+set colorcolumn=80
 set updatetime=1000
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
@@ -118,9 +112,6 @@ let g:terminal_color_14 = '#9AEDFE'
 " ===
 " === Basic Mappings
 " ===
-" Disable the default s key
-noremap s <nop>
-
 " Set <LEADER> as <SPACE>, ; as :
 let mapleader=" "
 
@@ -133,8 +124,6 @@ noremap W :w!<CR>
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
-" Open up lazygit
-noremap <LEADER>lg :term lazygit<CR>
 
 " ===
 " === Cursor Movement
@@ -146,9 +135,12 @@ noremap <silent> L w
 noremap <silent> <C-h> ^
 noremap <silent> <C-l> $
 
+
 " ===
 " === Window management
 " ===
+" Disable the default s key
+noremap s <nop>
 " split the screens to up (horizontal), down (horizontal), left (vertical), right (vertical)
 noremap spk :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
 noremap spj :set splitbelow<CR>:split<CR>
@@ -166,11 +158,7 @@ noremap <Up> :res +5<CR>
 noremap <Down> :res -5<CR>
 noremap <Left> :vertical resize-5<CR>
 noremap <Right> :vertical resize+5<CR>
-
-
-" ===
-" === Tab management
-" ===
+" tab management
 noremap stt :tabe<CR>
 noremap sth :-tabnext<CR>
 noremap stl :+tabnext<CR>
@@ -183,6 +171,9 @@ noremap stml :+tabmove<CR>
 " ===
 " Opening a terminal window
 noremap <LEADER>/ :term<CR>
+
+" Open up lazygit
+noremap <LEADER>lg :term lazygit<CR>
 
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
@@ -228,11 +219,12 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+"Plug 'morhetz/gruvbox'
+"Plug 'srcery-colors/srcery-vim'
+Plug 'ajmwagar/vim-deus'
+"Plug 'doums/darcula'
+Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
-"Plug 'ajmwagar/vim-deus'
-Plug 'srcery-colors/srcery-vim'
 
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -272,7 +264,6 @@ Plug 'mzlogin/vim-markdown-toc', { 'for': ['gitignore', 'markdown'] }
 " HTML, CSS, JavaScript, JSON, etc.
 Plug 'elzr/vim-json'
 Plug 'othree/html5.vim'
-Plug 'alvan/vim-closetag'
 Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 
 " Go
@@ -287,18 +278,14 @@ Plug 'tweekmonster/braceless.vim'
 Plug 'puremourning/vimspector', {'do': './install_gadget.py --enable-python --enable-go --enable-bash'}
 
 " Editor Enhancement
-Plug 'jwarby/antovim' " <LEADER>s 对当前光标下的单词取反义词
 Plug 'easymotion/vim-easymotion'
 Plug 'preservim/nerdcommenter'
 Plug 'lambdalisue/suda.vim' " 使用 :sudow 以root身份保存文件
 Plug 'sheerun/vim-polyglot'
 Plug 'godlygeek/tabular'
-"Plug 'junegunn/vim-easy-align'
-"Plug 'Konfekt/FastFold'
 
 " Vim Applications
 Plug 'itchyny/calendar.vim'
-Plug 'mhinz/vim-startify'
 
 " Other
 Plug 'wincent/terminus'
@@ -312,62 +299,35 @@ call plug#end()
 " ===
 " === Dress up my vim
 " ===
-"Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
-"If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
-"(see < http://sunaku.github.io/tmux-24bit-color.html#usage > for more information.)
-if (empty($TMUX))
-  if (has("nvim"))
-    "For Neovim 0.1.3 and 0.1.4 < https://github.com/neovim/neovim/pull/2198 >
-    let $NVIM_TUI_ENABLE_TRUE_COLOR=1
-  endif
-  "For Neovim > 0.1.5 and Vim > patch 7.4.1799 < https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162 >
-  "Based on Vim patch 7.4.1770 (`guicolors` option) < https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd >
-  " < https://github.com/neovim/neovim/wiki/Following-HEAD#20160511 >
-  if (has("termguicolors"))
-    set termguicolors
-  endif
-endif
 syntax on
+set termguicolors
 set background=dark " Setting dark mode
-" 注释斜体
-"hi Comment cterm=italic
-" 灰色注释
-"hi Comment guifg=#5C6370 ctermfg=59
-" 背景透明
-"hi Normal     ctermbg=NONE guibg=NONE
-"hi LineNr     ctermbg=NONE guibg=NONE
-"hi SignColumn ctermbg=NONE guibg=NONE
+"colorscheme gruvbox
+"colorscheme darcula
+colorscheme deus
+"colorscheme srcery
+
 
 " ===
-" === deus theme
+" === lightline
 " ===
-"let g:deus_termcolors=256
+"let g:lightline = { 'colorscheme': 'gruvbox' }
+"let g:lightline = { 'colorscheme': 'darculaOriginal' }
+let g:lightline = { 'colorscheme': 'deus' }
+"let g:lightline = { 'colorscheme': 'srcery' }
 
-" ===
-" === color theme
-" ===
-colorscheme srcery
-
-" ===
-" === airline
-" ===
-let g:airline_theme='srcery'
-let g:airline_powerline_fonts = 1   " 使状态栏显示箭头效果,需要安装powerline-fonts字体
 
 " ===
 " === Colorizer
 " ===
 let g:colorizer_syntax = 1
 
+
 " ===
 " === rainbow
 " ===
 let g:rainbow_active = 1
 
-" ===
-" ===
-" ===
-noremap <LEADER>db :Startify<CR>
 
 " ===
 " === GitGutter
@@ -381,23 +341,12 @@ nnoremap gh :GitGutterPreviewHunk<CR>
 nnoremap gk :GitGutterPrevHunk<CR>
 nnoremap gj :GitGutterNextHunk<CR>
 
+
 " ===
 " === tabular
 " ===
 vmap ga :Tabularize /
 
-" ===
-" === fastfold , 实在不知道有什么用,所以禁用了
-" ===
-"nmap zuz <Plug>(FastFoldUpdate)
-"let g:fastfold_savehook = 1
-"let g:fastfold_fold_command_suffixes =  ['x','X','a','A','o','O','c','C']
-"let g:fastfold_fold_movement_commands = [']z', '[z', 'ze', 'zu']
-"let g:markdown_folding = 1
-"let g:vimsyn_folding = 'af'
-"let g:xml_syntax_folding = 1
-"let g:javaScript_fold = 1
-"let g:sh_fold_enabled= 7
 
 " ===
 " === xtabline, 这个插件其实我也不清楚到底有什么实际作用
@@ -409,12 +358,14 @@ let g:xtabline_settings.enable_persistance = 0
 let g:xtabline_settings.last_open_first = 1
 noremap to :XTabMode<CR>
 
+
 " ===
 " === any-jump
 " ===
 nnoremap fj :AnyJump<CR>
 let g:any_jump_window_width_ratio  = 0.8
 let g:any_jump_window_height_ratio = 0.9
+
 
 " ===
 " === Undotree
@@ -432,6 +383,7 @@ function g:Undotree_CustomMap()
     nmap <buffer> K 5<plug>UndotreeNextState
     nmap <buffer> J 5<plug>UndotreePreviousState
 endfunc
+
 
 " ===
 " === vimspector
@@ -451,6 +403,7 @@ sign define vimspectorBP text=🛑 texthl=Normal
 sign define vimspectorBPDisabled text=🚫 texthl=Normal
 sign define vimspectorPC text=👉 texthl=SpellBad
 
+
 " ===
 " === vim-easymotion
 " ===
@@ -463,33 +416,41 @@ nmap fc <Plug>(easymotion-overwin-f)
 " Move to line
 map fl <Plug>(easymotion-bd-jk)
 nmap fl <Plug>(easymotion-overwin-line)
-" Move to word
-map  fw <Plug>(easymotion-bd-w)
-nmap fw <Plug>(easymotion-overwin-w)
 
-" ===
-" === vim-closetag
-" ===
-let g:closetag_filenames = '*.html,*.xhtml,*.phtml,*.vue'
-let g:closetag_filetypes = 'html,xhtml,phtml,vue'
-let g:closetag_xhtml_filenames = '*.xhtml,*.jsx'
-let g:closetag_xhtml_filetypes = 'xhtml,jsx'
 
 " ===
 " === suda.vim
 " ===
 cnoreabbrev sudow w suda://%
 
+
 " ===
 " === Python-syntax
 " ===
 let g:python_highlight_all = 1
 
+
 " ===
 " === coc
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = ['coc-python', 'coc-html', 'coc-json', 'coc-css', 'coc-phpls', 'coc-lists', 'coc-yank', 'coc-git', 'coc-gitignore', 'coc-explorer', 'coc-translator', 'coc-markmap', 'coc-vetur', 'coc-snippets', 'coc-tsserver', 'coc-emmet', 'coc-highlight', 'coc-todolist', 'coc-pairs']
+let g:coc_global_extensions = [
+           \ 'coc-python',
+            \ 'coc-html',
+            \ 'coc-json',
+            \ 'coc-css',
+            \ 'coc-phpls',
+            \ 'coc-lists',
+            \ 'coc-tsserver',
+            \ 'coc-emmet',
+            \ 'coc-vetur',
+            \ 'coc-yank',
+            \ 'coc-git',
+            \ 'coc-gitignore',
+            \ 'coc-explorer',
+            \ 'coc-snippets',
+            \ 'coc-highlight',
+            \ 'coc-pairs']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " Use tab for trigger completion with characters ahead and navigate.
@@ -505,8 +466,10 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
+
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
 if has('patch8.1.1068')
@@ -515,14 +478,17 @@ if has('patch8.1.1068')
 else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
+
 " Use <Tab> and <S-Tab> to navigate the completion list:
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
 " Use LEADER k to show documentation in preview window
 nnoremap <silent> <f1> :call <SID>show_documentation()<CR>
 function! s:show_documentation()
@@ -532,22 +498,14 @@ function! s:show_documentation()
         call CocAction('doHover')
     endif
 endfunction
+
 " Useful commands
 " coc-explorer
-nmap tt :CocCommand explorer<CR>
-" coc-translator
-nmap ts <Plug>(coc-translator-p)
-" coc-markmap
-nmap <LEADER>mm <Plug>(coc-markmap-create)
+nnoremap tt :CocCommand explorer<CR>
 " coc-yank
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
-" Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
-" coc-todolist
-nnoremap <leader>tn :CocCommand todolist.create<CR>
-nnoremap <leader>tl :CocList todolist<CR>
 
 
 " ===
@@ -583,6 +541,7 @@ noremap <LEADER>mtm :TableModeToggle<CR>
 "let g:table_mode_disable_mappings = 1
 let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 
+
 " ===
 " === Markdown Settings
 " ===
@@ -590,6 +549,7 @@ let g:table_mode_cell_text_object_i_map = 'k<Bar>'
 source ~/.config/nvim/md-snippets.vim
 " auto spell
 autocmd BufRead,BufNewFile *.md setlocal spell
+
 
 " ===
 " === Bullets.vim
@@ -601,6 +561,7 @@ let g:bullets_enabled_file_types = [
             \ 'gitcommit',
             \ 'scratch'
             \]
+
 
 " ===
 " === vim-markdown-toc, :GenToGFM 生成目录, :RmoveToc 删除目录, :UpdateToc 手动更新目录
@@ -623,7 +584,6 @@ let g:vmt_fence_closing_text = '/TOC'
 "noremap ff  :ProjectFiles<CR>
 noremap ff  :GFiles<CR>
 noremap fs  :Rg<CR>
-noremap fas :Ag<CR>
 noremap bb  :Buffers<CR>
 
 autocmd! FileType fzf
@@ -636,6 +596,7 @@ command! -bang -nargs=* Buffers
             \   <bang>0 ? fzf#vim#with_preview('up:60%')
             \           : fzf#vim#with_preview('right:0%', '?'),
             \   <bang>0)
+
 
 " ===
 " === Ultisnips
@@ -770,15 +731,25 @@ noremap \\ :Calendar -first_day=monday<CR>
 noremap \cc :Calendar -view=clock<CR>
 noremap \cy :Calendar -view=year<CR>
 
+
 " ===================== End of Plugin Settings =====================
 
 " ===
-" === Necessary Commands to Execute
+" === Create a _machine_specific.vim
 " ===
-exec "nohlsearch"
+let has_machine_specific_file = 1
+if empty(glob('~/.config/nvim/_machine_specific.vim'))
+    let has_machine_specific_file = 0
+    silent! exec "!cp ~/.config/nvim/default_configs/_machine_specific_default.vim ~/.config/nvim/_machine_specific.vim"
+endif
+source ~/.config/nvim/_machine_specific.vim
 
 " Open the _machine_specific.vim file if it has just been created
 if has_machine_specific_file == 0
     exec "e ~/.config/nvim/_machine_specific.vim"
 endif
 
+" ===
+" === Necessary Commands to Execute
+" ===
+exec "nohlsearch"

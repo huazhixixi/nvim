@@ -3,19 +3,22 @@
     "coc.preferences.enableFloatHighlight": true,
     "coc.preferences.extensionUpdateCheck": "daily",
     "coc.preferences.formatOnSaveFiletypes": [
+        "html",
         "css",
+        "js",
+        "vue",
         "python",
         "go"
     ],
 
     "git.enableGutters": true,
-    "git.addGBlameToBufferVar": true,
-    "git.addGBlameToVirtualText": true,
-    "git.addedSign.hlGroup": "GitGutterAdd",
-    "git.changedSign.hlGroup": "GitGutterChange",
-    "git.removedSign.hlGroup": "GitGutterDelete",
-    "git.topRemovedSign.hlGroup": "GitGutterDelete",
-    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+    "git.addGBlameToBufferVar": false,
+    "git.addGBlameToVirtualText": false,
+    //"git.addedSign.hlGroup": "GitGutterAdd",
+    //"git.changedSign.hlGroup": "GitGutterChange",
+    //"git.removedSign.hlGroup": "GitGutterDelete",
+    //"git.topRemovedSign.hlGroup": "GitGutterDelete",
+    //"git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
 
     "suggest.detailMaxLength": 60,
     "suggest.noselect": false,
@@ -30,30 +33,28 @@
     "suggest.echodocSupport": true,
 
     "diagnostic.signOffset": 1,
-    "diagnostic.errorSign": "×",
-    "diagnostic.warningSign": "»",
-    "diagnostic.infoSign": "ღ",
-    "diagnostic.hintSign": "ஐ",
+    "diagnostic.errorSign": "❌",
+    "diagnostic.warningSign": "⚠️",
+    "diagnostic.infoSign": "ℹ️",
+    "diagnostic.hintSign": "💭",
     "diagnostic.displayByAle": false,
     "diagnostic.refreshOnInsertMode": false,
     "diagnostic.refreshAfterSave": false,
     "diagnostic.checkCurrentLine": true,
-    "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+    "diagnostic.virtualTextPrefix": "❗",
     "diagnostic.virtualText": true,
 
-    "explorer.width": 35,
+    "explorer.width": 30,
     "explorer.file.showHiddenFiles": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.file.column.git.showIgnored": true,
     "explorer.file.column.indent.indentLine": true,
     "explorer.buffer.showHiddenBuffers": false,
 
-    "python.jediEnabled": false,
-    "python.formatting.provider": "autopep8",
 
     "yank.enableCompletion": false,
-    "todolist.promptForReminder": false,
-
+    "python.jediEnabled": false,
+    "python.formatting.provider": "autopep8",
     "languageserver": {
         "golang": {
             "command": "gopls",
@@ -73,7 +74,7 @@
         },
         "vue": {
             "command": "vls",
-            "filetypes": ["html", "js", "vue"]
+            "filetypes": ["vue"]
         }
     }
 }
