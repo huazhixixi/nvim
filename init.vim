@@ -7,16 +7,7 @@
 " Author: fock of @theniceboy with my private modifiactons
 
 " This is the minimal version
-
-
-" ===
-" === Auto load for first time uses
-" ===
-if empty(glob('~/.config/nvim/autoload/plug.vim'))
-    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
+" - no plugins
 
 
 " ====================
@@ -92,6 +83,7 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 let g:neoterm_autoscroll = 1
 autocmd TermOpen term://* startinsert
 tnoremap <C-N> <C-\><C-N>
+tnoremap <C-O> <C-\><C-N><C-O>
 let g:terminal_color_0   = '#000000'
 let g:terminal_color_1   = '#FF5555'
 let g:terminal_color_2   = '#50FA7B'
@@ -175,9 +167,6 @@ noremap <LEADER>/ :term<CR>
 " Open up lazygit
 noremap <LEADER>lg :term lazygit<CR>
 
-" Press space twice to jump to the next '<++>' and edit it
-noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
-
 " find and replace
 noremap \s :%s//g<left><left>
 
@@ -198,8 +187,6 @@ func! CompileRunGcc()
         set splitbelow
         :sp
         :term python3 %
-    elseif &filetype == 'markdown'
-        exec "MarkdownPreview"
     elseif &filetype == 'sh'
         :!time bash %
     elseif &filetype == 'html'
@@ -213,162 +200,7 @@ endfunc
 
 
 " ===
-" === Install Plugins with Vim-Plug
-" ===
-call plug#begin('~/.config/nvim/plugged')
-
-"Plug 'morhetz/gruvbox'
-"Plug 'srcery-colors/srcery-vim'
-"Plug 'ajmwagar/vim-deus'
-Plug 'doums/darcula'
-Plug 'itchyny/lightline.vim'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'lambdalisue/suda.vim'
-Plug 'godlygeek/tabular'
-
-call plug#end()
-
-
-" ===================== Start of Plugin Settings =====================
-
-" ===
-" === theme
-" ===
-syntax on
-set termguicolors
-set background=dark " Setting dark mode
-"colorscheme gruvbox
-colorscheme darcula
-"colorscheme deus
-"colorscheme srcery
-
-
-" ===
-" === lightline
-" ===
-"let g:lightline = { 'colorscheme': 'gruvbox' }
-let g:lightline = { 'colorscheme': 'darculaOriginal' }
-"let g:lightline = { 'colorscheme': 'deus' }
-"let g:lightline = { 'colorscheme': 'srcery' }
-
-
-" ===
-" === coc
-" ===
-"silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
-let g:coc_global_extensions = [
-            \ 'coc-python',
-            \ 'coc-html',
-            \ 'coc-json',
-            \ 'coc-css',
-            \ 'coc-phpls',
-            \ 'coc-lists',
-            \ 'coc-tsserver',
-            \ 'coc-emmet',
-            \ 'coc-vetur',
-            \ 'coc-yank',
-            \ 'coc-git',
-            \ 'coc-gitignore',
-            \ 'coc-explorer',
-            \ 'coc-snippets',
-            \ 'coc-highlight',
-            \ 'coc-pairs']
-" Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
-" position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
-  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
-else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-endif
-
-" Use <Tab> and <S-Tab> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use LEADER k to show documentation in preview window
-nnoremap <silent> <f1> :call <SID>show_documentation()<CR>
-function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
-endfunction
-
-" Useful commands
-" coc-explorer
-nmap tt :CocCommand explorer<CR>
-" coc-yank
-nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-
-" ===
-" === vim-go
-" ===
-let g:go_auto_type_info                      = 1
-let g:go_highlight_array_whitespace_error    = 1
-let g:go_highlight_build_constraints         = 1
-let g:go_highlight_chan_whitespace_error     = 1
-let g:go_highlight_extra_types               = 1
-let g:go_highlight_fields                    = 1
-let g:go_highlight_format_strings            = 1
-let g:go_highlight_function_calls            = 1
-let g:go_highlight_function_parameters       = 1
-let g:go_highlight_functions                 = 1
-let g:go_highlight_generate_tags             = 1
-let g:go_highlight_methods                   = 1
-let g:go_highlight_operators                 = 1
-let g:go_highlight_space_tab_error           = 1
-let g:go_highlight_string_spellcheck         = 1
-let g:go_highlight_structs                   = 1
-let g:go_highlight_trailing_whitespace_error = 1
-let g:go_highlight_types                     = 1
-let g:go_def_mapping_enabled                 = 0
-let g:go_doc_keywordprg_enabled              = 0
-autocmd FileType go noremap gk :GoDoc<CR>
-autocmd FileType go noremap gta :GoTest<CR>
-autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
-
-
-" ===
-" === tabular
-" ===
-vmap ga :Tabularize /
-
-
-" ===================== End of Plugin Settings =====================
-
-" ===
-" === Create a _machine_specific.vim file to adjust machine specific stuff, like python interpreter location
+" === Create a _machine_specific.vim file
 " ===
 let has_machine_specific_file = 1
 if empty(glob('~/.config/nvim/_machine_specific.vim'))
