@@ -217,13 +217,14 @@ endfunc
 " ===
 call plug#begin('~/.config/nvim/plugged')
 
+"Plug 'morhetz/gruvbox'
 "Plug 'srcery-colors/srcery-vim'
 "Plug 'ajmwagar/vim-deus'
 Plug 'doums/darcula'
 Plug 'itchyny/lightline.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'lambdalisue/suda.vim' " 使用 :sudow 以root身份保存文件
+Plug 'lambdalisue/suda.vim'
 Plug 'godlygeek/tabular'
 
 call plug#end()
@@ -237,6 +238,7 @@ call plug#end()
 syntax on
 set termguicolors
 set background=dark " Setting dark mode
+"colorscheme gruvbox
 colorscheme darcula
 "colorscheme deus
 "colorscheme srcery
@@ -245,6 +247,7 @@ colorscheme darcula
 " ===
 " === lightline
 " ===
+"let g:lightline = { 'colorscheme': 'gruvbox' }
 let g:lightline = { 'colorscheme': 'darculaOriginal' }
 "let g:lightline = { 'colorscheme': 'deus' }
 "let g:lightline = { 'colorscheme': 'srcery' }

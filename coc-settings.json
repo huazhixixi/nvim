@@ -12,8 +12,8 @@
     ],
 
     "git.enableGutters": true,
-    "git.addGBlameToBufferVar": true,
-    "git.addGBlameToVirtualText": true,
+    "git.addGBlameToBufferVar": false,
+    "git.addGBlameToVirtualText": false,
     //"git.addedSign.hlGroup": "GitGutterAdd",
     //"git.changedSign.hlGroup": "GitGutterChange",
     //"git.removedSign.hlGroup": "GitGutterDelete",
@@ -44,19 +44,17 @@
     "diagnostic.virtualTextPrefix": "❗",
     "diagnostic.virtualText": true,
 
-    "explorer.width": 35,
+    "explorer.width": 30,
     "explorer.file.showHiddenFiles": true,
     "explorer.icon.enableNerdfont": true,
     "explorer.file.column.git.showIgnored": true,
     "explorer.file.column.indent.indentLine": true,
     "explorer.buffer.showHiddenBuffers": false,
 
-    "python.jediEnabled": false,
-    "python.formatting.provider": "autopep8",
 
     "yank.enableCompletion": false,
-    "todolist.promptForReminder": false,
-
+    "python.jediEnabled": false,
+    "python.formatting.provider": "autopep8",
     "languageserver": {
         "golang": {
             "command": "gopls",
