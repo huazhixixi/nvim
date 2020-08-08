@@ -266,6 +266,9 @@ Plug 'elzr/vim-json'
 Plug 'othree/html5.vim'
 Plug 'yuezk/vim-js', { 'for': ['vim-plug', 'php', 'html', 'javascript', 'css', 'less'] }
 
+" Rust
+Plug 'rust-lang/rust.vim'
+
 " Go
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
@@ -700,6 +703,12 @@ let g:go_doc_keywordprg_enabled              = 0
 autocmd FileType go noremap gk :GoDoc<CR>
 autocmd FileType go noremap gta :GoTest<CR>
 autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
+
+" ===
+" === Rust
+" ===
+let g:rustfmt_autosave = 1
+let g:rust_clip_command = 'xclip -selection clipboard'
 
 
 " ===
