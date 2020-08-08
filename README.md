@@ -4,9 +4,10 @@
 - [快速开始](#快速开始)
 - [安装后,您需要](#安装后您需要)
 - [语言支持](#语言支持)
+    + [Bash](#bash)
     + [Golang](#golang)
-    + [shell](#shell)
     + [Pythoon](#pythoon)
+    + [Rust](#rust)
 
 <!-- /TOC -->
 
@@ -31,14 +32,17 @@ git clone --depth 1 https://github.com/Wjinlei/nvim.git ~/.config/nvim
 - [ ] 执行`:checkhealth`(检测有无错误)
 
 ### 语言支持
+#### Bash
+- [ ] 安装`bash-lanuage-server`(npm)
+
 #### Golang
 - [ ] 执行`:GoInstallBinary`
 - [ ] 安装`Delve`,执行`go get github.com/go-delve/delve/cmd/dlv`
-
-#### shell
-- [ ] 安装`bash-lanuage-server`(npm)
 
 #### Pythoon
 - [ ] 安装`autopep8`(pip)
 - [ ] 安装`pylint`(pip)
 - [ ] 安装`debugpy`(pip)
+
+#### Rust
+- [ ] 安装`rustup component add rls rust-analysis rust-src`

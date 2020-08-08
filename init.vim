@@ -208,6 +208,9 @@ func! CompileRunGcc()
         set splitbelow
         :sp
         :term go run %
+    elseif &filetype == 'rust'
+        exec "!rustc % -o %<"
+        exec "!time ./%<"
     endif
 endfunc
 
@@ -438,7 +441,8 @@ let g:python_highlight_all = 1
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = [
-           \ 'coc-python',
+            \ 'coc-python',
+            \ 'coc-rls',
             \ 'coc-html',
             \ 'coc-json',
             \ 'coc-css',
