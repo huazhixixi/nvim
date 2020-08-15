@@ -222,10 +222,10 @@ endfunc
 call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
-"Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 "Plug 'srcery-colors/srcery-vim'
 "Plug 'ajmwagar/vim-deus'
-Plug 'doums/darcula'
+"Plug 'doums/darcula'
 "Plug 'connorholyday/vim-snazzy'
 Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
@@ -309,8 +309,8 @@ call plug#end()
 syntax on
 set termguicolors
 set background=dark " Setting dark mode
-"colorscheme gruvbox
-colorscheme darcula
+colorscheme gruvbox
+"colorscheme darcula
 "colorscheme deus
 "colorscheme srcery
 "colorscheme snazzy
@@ -320,8 +320,8 @@ colorscheme darcula
 " ===
 " === lightline
 " ===
-"let g:lightline = { 'colorscheme': 'gruvbox' }
-let g:lightline = { 'colorscheme': 'darculaOriginal' }
+let g:lightline = { 'colorscheme': 'gruvbox' }
+"let g:lightline = { 'colorscheme': 'darculaOriginal' }
 "let g:lightline = { 'colorscheme': 'deus' }
 "let g:lightline = { 'colorscheme': 'srcery' }
 "let g:lightline = { 'colorscheme': 'snazzy' }
