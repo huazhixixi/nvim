@@ -610,7 +610,14 @@ let g:fzf_colors =
     \ 'header':  ['fg', 'Comment']
 \ }
 
- " Make Ripgrep ONLY search file contents and not filenames
+let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
+let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+
+"Get Files
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--inline-info']}), <bang>0)
+
+" Make Ripgrep ONLY search file contents and not filenames
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --hidden --smart-case --no-heading --color=always '.shellescape(<q-args>), 1,
@@ -618,10 +625,15 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview({'options': '--delimiter : --nth 4.. -e'}, 'right:50%', '?'),
   \   <bang>0)
 
-let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
-let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+" Git grep
+command! -bang -nargs=* GGrep
+  \ call fzf#vim#grep(
+  \   'git grep --line-number '.shellescape(<q-args>), 0,
+  \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
-noremap ff  :GFiles<CR>
+
+noremap ff  :Files<CR>
+noremap fg  :GGrep<CR>
 noremap fs  :Rg<CR>
 noremap bb  :Buffers<CR>
 
