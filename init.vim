@@ -225,8 +225,8 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'morhetz/gruvbox'
 "Plug 'srcery-colors/srcery-vim'
 "Plug 'ajmwagar/vim-deus'
-"Plug 'doums/darcula'
-Plug 'connorholyday/vim-snazzy'
+Plug 'doums/darcula'
+"Plug 'connorholyday/vim-snazzy'
 Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
 
@@ -310,10 +310,10 @@ syntax on
 set termguicolors
 set background=dark " Setting dark mode
 "colorscheme gruvbox
-"colorscheme darcula
+colorscheme darcula
 "colorscheme deus
 "colorscheme srcery
-colorscheme snazzy
+"colorscheme snazzy
 
 
 
@@ -321,10 +321,10 @@ colorscheme snazzy
 " === lightline
 " ===
 "let g:lightline = { 'colorscheme': 'gruvbox' }
-"let g:lightline = { 'colorscheme': 'darculaOriginal' }
+let g:lightline = { 'colorscheme': 'darculaOriginal' }
 "let g:lightline = { 'colorscheme': 'deus' }
 "let g:lightline = { 'colorscheme': 'srcery' }
-let g:lightline = { 'colorscheme': 'snazzy' }
+"let g:lightline = { 'colorscheme': 'snazzy' }
 
 
 " ===
