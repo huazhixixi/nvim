@@ -612,6 +612,7 @@ let g:fzf_colors =
 
 let $FZF_DEFAULT_OPTS = '--layout=reverse --inline-info'
 let $FZF_DEFAULT_COMMAND="rg --files --hidden --glob '!.git/**'"
+let g:fzf_buffers_jump = 1
 
 "Get Files
 command! -bang -nargs=? -complete=dir Files
