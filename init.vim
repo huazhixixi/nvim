@@ -230,7 +230,8 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'sickill/vim-monokai'
 "Plug 'NLKNguyen/papercolor-theme'
 Plug 'liuchengxu/space-vim-theme'
-Plug 'itchyny/lightline.vim'
+Plug 'liuchengxu/eleline.vim'
+"Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
 
 " File navigation
@@ -321,6 +322,7 @@ set background=dark " Setting dark mode
 "colorscheme PaperColor
 colorscheme space_vim_theme
 
+
 " ===
 " === 背景透明
 " ===
@@ -333,6 +335,13 @@ colorscheme space_vim_theme
 " === 灰色注释
 " ===
 hi Comment guifg=#5C6370 ctermfg=59
+
+
+" ===
+" === eleline
+" ===
+let g:eleline_powerline_fonts = 1
+let g:eleline_slim = 1
 
 
 " ===
