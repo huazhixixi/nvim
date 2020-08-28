@@ -384,6 +384,7 @@ nnoremap gj :GitGutterNextHunk<CR>
 " ===
 " === vimagit
 " ===
+noremap mg :Magit<CR>
 
 
 " ===
