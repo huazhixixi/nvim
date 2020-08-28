@@ -252,6 +252,7 @@ Plug 'MattesGroeger/vim-bookmarks'
 
 " Git
 Plug 'airblade/vim-gitgutter'
+Plug 'jreybert/vimagit'
 
 " Genreal Highlighter
 Plug 'RRethy/vim-hexokinase', { 'do': 'make hexokinase' }
@@ -379,6 +380,10 @@ nnoremap gf :GitGutterFold<CR>
 nnoremap gh :GitGutterPreviewHunk<CR>
 nnoremap gk :GitGutterPrevHunk<CR>
 nnoremap gj :GitGutterNextHunk<CR>
+
+" ===
+" === vimagit
+" ===
 
 
 " ===
