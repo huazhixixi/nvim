@@ -121,6 +121,12 @@ noremap Q :qa!<CR>
 noremap w :w!<CR>
 noremap W :w!<CR>
 
+" ESC
+onoremap <A-n> <ESC><ESC>
+inoremap <A-n> <ESC><ESC>
+cnoremap <A-n> <ESC><ESC>
+
+
 " Open the vimrc file anytime
 noremap <LEADER>rc :e ~/.config/nvim/init.vim<CR>
 
