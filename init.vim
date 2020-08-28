@@ -225,8 +225,11 @@ call plug#begin('~/.config/nvim/plugged')
 "Plug 'morhetz/gruvbox'
 "Plug 'srcery-colors/srcery-vim'
 "Plug 'ajmwagar/vim-deus'
-Plug 'doums/darcula'
+"Plug 'doums/darcula'
 "Plug 'connorholyday/vim-snazzy'
+"Plug 'sickill/vim-monokai'
+"Plug 'NLKNguyen/papercolor-theme'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
 
@@ -310,21 +313,38 @@ syntax on
 set termguicolors
 set background=dark " Setting dark mode
 "colorscheme gruvbox
-colorscheme darcula
+"colorscheme darcula
 "colorscheme deus
 "colorscheme srcery
 "colorscheme snazzy
+"colorscheme monokai
+"colorscheme PaperColor
+colorscheme space_vim_theme
 
+" ===
+" === 背景透明
+" ===
+"hi Normal     ctermbg=NONE guibg=NONE
+"hi LineNr     ctermbg=NONE guibg=NONE
+"hi SignColumn ctermbg=NONE guibg=NONE
+
+
+" ===
+" === 灰色注释
+" ===
+hi Comment guifg=#5C6370 ctermfg=59
 
 
 " ===
 " === lightline
 " ===
 "let g:lightline = { 'colorscheme': 'gruvbox' }
-let g:lightline = { 'colorscheme': 'darculaOriginal' }
+"let g:lightline = { 'colorscheme': 'darculaOriginal' }
 "let g:lightline = { 'colorscheme': 'deus' }
 "let g:lightline = { 'colorscheme': 'srcery' }
 "let g:lightline = { 'colorscheme': 'snazzy' }
+"let g:lightline = { 'colorscheme': 'PaperColor' }
+"let g:lightline = { 'colorscheme': 'space_vim_theme' }
 
 
 " ===
