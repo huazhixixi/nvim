@@ -462,8 +462,8 @@ let g:EasyMotion_do_mapping = 0
 let g:EasyMotion_do_shade = 0
 let g:EasyMotion_smartcase = 1
 " Move to {char}
-map  fc <Plug>(easymotion-bd-f)
-nmap fc <Plug>(easymotion-overwin-f)
+map  fn <Plug>(easymotion-bd-f)
+nmap fn <Plug>(easymotion-overwin-f)
 " Move to line
 map fl <Plug>(easymotion-bd-jk)
 nmap fl <Plug>(easymotion-overwin-line)
@@ -531,9 +531,11 @@ else
   imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use <Tab> and <S-Tab> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Use <C-j> and <C-k> to navigate the completion list:
+inoremap <C-j> <nop>
+inoremap <C-k> <nop>
+inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -678,20 +680,18 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 
-noremap ff  :Files<CR>
 noremap fg  :GGrep<CR>
 noremap fs  :Rg<CR>
+noremap ff  :Files<CR>
 noremap bb  :Buffers<CR>
 
 " ===
 " === Ultisnips
 " ===
-inoremap <C-j> <nop>
-inoremap <C-k> <nop>
 "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<C-j>"
-let g:UltiSnipsJumpForwardTrigger="<C-j>"
-let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+"let g:UltiSnipsExpandTrigger="<C-j>"
+"let g:UltiSnipsJumpForwardTrigger="<C-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
