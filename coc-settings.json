@@ -12,6 +12,8 @@
         "go"
     ],
 
+    "translator.engines": ["google"],
+
     "git.enableGutters": true,
     "git.addGBlameToBufferVar": false,
     "git.addGBlameToVirtualText": false,

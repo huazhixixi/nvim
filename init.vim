@@ -563,7 +563,7 @@ nnoremap tt :CocCommand explorer<CR>
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
-vmap ts <Plug>(coc-translator-p)
+vmap ts <Plug>(coc-translator-pv)
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
