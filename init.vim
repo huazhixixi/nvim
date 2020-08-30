@@ -502,6 +502,7 @@ let g:coc_global_extensions = [
             \ 'coc-explorer',
             \ 'coc-snippets',
             \ 'coc-highlight',
+            \ 'coc-translator',
             \ 'coc-pairs']
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
@@ -534,6 +535,8 @@ endif
 " Use <C-j> and <C-k> to navigate the completion list:
 inoremap <C-j> <nop>
 inoremap <C-k> <nop>
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
@@ -558,6 +561,9 @@ endfunction
 nnoremap tt :CocCommand explorer<CR>
 " coc-yank
 nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
+" coc-translator
+nmap ts <Plug>(coc-translator-p)
+vmap ts <Plug>(coc-translator-p)
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
