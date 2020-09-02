@@ -533,12 +533,8 @@ else
 endif
 
 " Use <C-j> and <C-k> to navigate the completion list:
-inoremap <C-j> <nop>
-inoremap <C-k> <nop>
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <C-j> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <C-k> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -695,9 +691,11 @@ noremap bb  :Buffers<CR>
 " === Ultisnips
 " ===
 "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-"let g:UltiSnipsExpandTrigger="<C-j>"
-"let g:UltiSnipsJumpForwardTrigger="<C-j>"
-"let g:UltiSnipsJumpBackwardTrigger="<C-k>"
+inoremap <C-j> <nop>
+inoremap <C-k> <nop>
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsJumpForwardTrigger="<C-j>"
+let g:UltiSnipsJumpBackwardTrigger="<C-k>"
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
@@ -789,10 +787,10 @@ let g:go_highlight_types                     = 1
 let g:go_def_mapping_enabled                 = 0
 let g:go_doc_keywordprg_enabled              = 0
 let g:go_fmt_autosave                        = 1
-"let g:go_imports_autosave                    = 1
+let g:go_imports_autosave                    = 1
 "let g:go_mod_fmt_autosave                    = 1
-"let g:go_metalinter_autosave                 = 1
-"let g:go_metalinter_autosave_enabled         = ['vet', 'golint']
+let g:go_metalinter_autosave                 = 1
+let g:go_metalinter_autosave_enabled         = ['vet', 'golint']
 autocmd FileType go noremap gk :GoDoc<CR>
 autocmd FileType go noremap gta :GoTest<CR>
 autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
