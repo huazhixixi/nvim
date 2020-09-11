@@ -42,3 +42,10 @@ if err != nil {
 	return err
 }
 endsnippet
+
+
+snippet ifherr "handleError" b
+if handleError(c, "$0", $1) {
+	return
+}
+endsnippet

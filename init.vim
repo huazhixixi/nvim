@@ -789,8 +789,8 @@ let g:go_doc_keywordprg_enabled              = 0
 let g:go_fmt_autosave                        = 1
 let g:go_imports_autosave                    = 1
 "let g:go_mod_fmt_autosave                    = 1
-let g:go_metalinter_autosave                 = 1
-let g:go_metalinter_autosave_enabled         = ['vet', 'golint']
+"let g:go_metalinter_autosave                 = 1
+"let g:go_metalinter_autosave_enabled         = ['vet', 'golint']
 autocmd FileType go noremap gk :GoDoc<CR>
 autocmd FileType go noremap gta :GoTest<CR>
 autocmd FileTYpe go noremap gtt :GoTestFunc<CR>
