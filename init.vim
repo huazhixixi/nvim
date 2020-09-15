@@ -684,7 +684,7 @@ command! -bang -nargs=* GGrep
 
 noremap fg  :GGrep<CR>
 noremap fs  :Rg<CR>
-noremap ff  :Files<CR>
+"noremap ff  :Files<CR>
 noremap bb  :Buffers<CR>
 
 " ===
@@ -807,7 +807,7 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 " ===
 let g:rnvimr_ex_enable = 1
 let g:rnvimr_pick_enable = 1
-nnoremap <silent> R :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
+nnoremap <silent> ff :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
 let g:rnvimr_layout = { 'relative': 'editor',
             \ 'width': &columns,
             \ 'height': &lines,
