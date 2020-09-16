@@ -815,6 +815,8 @@ let g:rnvimr_enable_bw = 1
 highlight link RnvimrNormal CursorLine
 nnoremap <silent> ff :RnvimrToggle<CR>
 tnoremap <silent> ff <C-\><C-n>:RnvimrToggle<CR>
+nnoremap <silent> FF :RnvimrToggle<CR>
+tnoremap <silent> FF <C-\><C-n>:RnvimrToggle<CR>
 " Map Rnvimr action
 let g:rnvimr_action = {
             \ '<C-t>': 'NvimEdit tabedit',
