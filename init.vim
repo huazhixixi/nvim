@@ -809,8 +809,20 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 let g:rnvimr_enable_ex = 1
 " Make Ranger to be hidden after picking a file
 let g:rnvimr_enable_picker = 1
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+" Link CursorLine into RnvimrNormal highlight in the Floating window
+highlight link RnvimrNormal CursorLine
 nnoremap <silent> ff :RnvimrToggle<CR>
 tnoremap <silent> ff <C-\><C-n>:RnvimrToggle<CR>
+" Map Rnvimr action
+let g:rnvimr_action = {
+            \ '<C-t>': 'NvimEdit tabedit',
+            \ '<C-x>': 'NvimEdit split',
+            \ '<C-v>': 'NvimEdit vsplit',
+            \ 'gw': 'JumpNvimCwd',
+            \ 'yw': 'EmitRangerCwd'
+            \ }
 let g:rnvimr_presets = [{'width': 0.8, 'height': 0.8}]
 
 
