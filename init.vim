@@ -809,13 +809,9 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 let g:rnvimr_enable_ex = 1
 " Make Ranger to be hidden after picking a file
 let g:rnvimr_enable_picker = 1
-" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
-let g:rnvimr_enable_bw = 1
-" Set up only two columns in miller mode and draw border with both
-let g:rnvimr_ranger_cmd = 'ranger --cmd="set column_ratios 1,1"
-            \ --cmd="set draw_borders both"'
 nnoremap <silent> ff :RnvimrToggle<CR>
-let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
+tnoremap <silent> ff <C-\><C-n>:RnvimrToggle<CR>
+let g:rnvimr_presets = [{'width': 0.8, 'height': 0.8}]
 
 
 " ===
