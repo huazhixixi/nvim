@@ -33,6 +33,7 @@ set autochdir
 " ===
 " === Editor behavior
 " ===
+set hidden
 set number
 set relativenumber
 set cursorline
@@ -81,7 +82,7 @@ if has('persistent_undo')
     set undodir=~/.config/nvim/tmp/undo,.
 endif
 set colorcolumn=80
-set updatetime=1000
+set updatetime=100
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
 
@@ -241,6 +242,7 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'kevinhwang91/rnvimr'
 Plug 'pechorin/any-jump.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 
 " Snippets
 Plug 'SirVer/ultisnips'
@@ -478,14 +480,17 @@ let g:python_highlight_all = 1
 " ===
 "silent! au BufEnter,BufRead,BufNewFile * silent! unmap if
 let g:coc_global_extensions = [
+            \ 'coc-actions',
+            \ 'coc-diagnostic',
+            \ 'coc-tsserver',
             \ 'coc-python',
+            \ 'coc-phpls',
             \ 'coc-rls',
             \ 'coc-html',
-            \ 'coc-json',
             \ 'coc-css',
-            \ 'coc-phpls',
+            \ 'coc-json',
+            \ 'coc-vimlsp',
             \ 'coc-lists',
-            \ 'coc-tsserver',
             \ 'coc-emmet',
             \ 'coc-vetur',
             \ 'coc-yank',
@@ -496,8 +501,19 @@ let g:coc_global_extensions = [
             \ 'coc-highlight',
             \ 'coc-translator',
             \ 'coc-pairs']
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
 set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
@@ -512,21 +528,23 @@ function! s:check_back_space() abort
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
+" Use <alt+/> to trigger completion.
+inoremap <silent><expr> <M-/> coc#refresh()
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
 " position. Coc only does snippet and additional edit on confirm.
-if has('patch8.1.1068')
-  " Use `complete_info` if your (Neo)Vim version supports it.
+" <cr> could be remapped by other vim plugin, try `:verbose imap <CR>`.
+if exists('*complete_info')
   inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
 else
-  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
-" Use <C-j> and <C-k> to navigate the completion list:
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Use `=` and `-` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nnoremap <silent><nowait> <LEADER>d :CocList diagnostics<cr>
+nmap <silent> = <Plug>(coc-diagnostic-prev)
+nmap <silent> - <Plug>(coc-diagnostic-next)
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -534,26 +552,41 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use LEADER k to show documentation in preview window
-nnoremap <silent> <f1> :call <SID>show_documentation()<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> <LEADER>h :call <SID>show_documentation()<CR>
 function! s:show_documentation()
-    if (index(['vim','help'], &filetype) >= 0)
-        execute 'h '.expand('<cword>')
-    else
-        call CocAction('doHover')
-    endif
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
 endfunction
+
+" Remap for do codeAction of selected region
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+xmap <silent> <LEADER>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <LEADER>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Useful commands
 " coc-explorer
 nnoremap tt :CocCommand explorer<CR>
-" coc-yank
-nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 " coc-translator
 nmap ts <Plug>(coc-translator-p)
 vmap ts <Plug>(coc-translator-pv)
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+" coc-snippets
+imap <C-l> <Plug>(coc-snippets-expand)
+vmap <C-j> <Plug>(coc-snippets-select)
+let g:coc_snippet_next = '<c-j>'
+let g:coc_snippet_prev = '<c-k>'
+imap <C-j> <Plug>(coc-snippets-expand-jump)
+let g:snips_author = "Jerry Wang"
+" coc-yank
+nnoremap <silent> <LEADER>y :<C-u>CocList -A --normal yank<cr>
 
 
 " ===
@@ -620,6 +653,16 @@ let g:vmt_cycle_list_item_markers = 1
 let g:vmt_fence_text = 'TOC'
 let g:vmt_fence_closing_text = '/TOC'
 
+" ===
+" === LeaderF
+" ===
+noremap <silent> ff :Leaderf file<CR>
+"let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_PreviewCode = 1
+let g:Lf_ShowHidden = 1
+let g:Lf_ShowDevIcons = 1
+let g:Lf_IgnoreCurrentBufferName = 1
 
 " ===
 " === FZF
@@ -674,7 +717,7 @@ command! -bang -nargs=* GGrep
   \   fzf#vim#with_preview({'dir': systemlist('git rev-parse --show-toplevel')[0]}), <bang>0)
 
 
-noremap fg  :GGrep<CR>
+"noremap fg  :GGrep<CR>
 noremap fs  :Rg<CR>
 "noremap ff  :Files<CR>
 noremap bb  :Buffers<CR>
@@ -683,8 +726,6 @@ noremap bb  :Buffers<CR>
 " === Ultisnips
 " ===
 "" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
-inoremap <C-j> <nop>
-inoremap <C-k> <nop>
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsJumpForwardTrigger="<C-j>"
 let g:UltiSnipsJumpBackwardTrigger="<C-k>"
@@ -805,10 +846,8 @@ let g:rnvimr_enable_picker = 1
 let g:rnvimr_enable_bw = 1
 " Link CursorLine into RnvimrNormal highlight in the Floating window
 highlight link RnvimrNormal CursorLine
-nnoremap <silent> ff :RnvimrToggle<CR>
-tnoremap <silent> ff <C-\><C-n>:RnvimrToggle<CR>
-nnoremap <silent> FF :RnvimrToggle<CR>
-tnoremap <silent> FF <C-\><C-n>:RnvimrToggle<CR>
+nnoremap <silent> R :RnvimrToggle<CR>
+tnoremap <silent> R <C-\><C-n>:RnvimrToggle<CR>
 " Map Rnvimr action
 let g:rnvimr_action = {
             \ '<C-t>': 'NvimEdit tabedit',

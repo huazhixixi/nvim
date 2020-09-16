@@ -1,78 +1,162 @@
 {
-    "coc.preferences.hoverTarget": "preview",
-    "coc.preferences.enableFloatHighlight": true,
-    "coc.preferences.extensionUpdateCheck": "daily",
-    "coc.preferences.formatOnSaveFiletypes": [
-        "rust",
-        "html",
-        "css",
-        "js",
-        "vue",
-        "python",
-        "go"
-    ],
+  "coc.preferences.extensionUpdateCheck": "daily",
+  "coc.preferences.hoverTarget": "preview",
+  "coc.preferences.enableFloatHighlight": true,
+  "coc.preferences.snippetStatusText": "Ⓢ ",
+  "coc.preferences.formatOnSaveFiletypes": [
+    "sh",
+    "rust",
+    "html",
+    "css",
+    "js",
+    "vue",
+    "python",
+    "go",
+    "json"
+  ],
+  "suggest.completionItemKindLabels": {
+    "class": "\uf0e8",
+    "color": "\ue22b",
+    "constant": "\uf8fe",
+    "default": "\uf29c",
+    "enum": "\uf435",
+    "enumMember": "\uf02b",
+    "event": "\ufacd",
+    "field": "\uf93d",
+    "file": "\uf723",
+    "folder": "\uf115",
+    "function": "\u0192",
+    "interface": "\uf417",
+    "keyword": "\uf1de",
+    "method": "\uf6a6",
+    "module": "\uf40d",
+    "operator": "\uf915",
+    "property": "\ue624",
+    "reference": "\ufa46",
+    "snippet": "\ue60b",
+    "struct": "\ufb44",
+    "text": "\ue612",
+    "typeParameter": "\uf728",
+    "unit": "\uf475",
+    "value": "\uf89f",
+    "variable": "\ue71b"
+  },
+  "suggest.detailMaxLength": 60,
+  "suggest.noselect": false,
+  "suggest.enablePreselect": false,
+  "suggest.triggerAfterInsertEnter": true,
+  "suggest.autoTrigger": "always",
+  "suggest.timeout": 5000,
+  "suggest.enablePreview": true,
+  "suggest.floatEnable": true,
+  "suggest.detailField": "preview",
+  "suggest.snippetIndicator": "",
+  "suggest.triggerCompletionWait": 100,
+  "suggest.echodocSupport": true,
 
-    "translator.engines": ["google"],
+  "diagnostic.signOffset": 1,
+  "diagnostic.errorSign": "\uf467",
+  "diagnostic.warningSign": "\uf071",
+  "diagnostic.infoSign": "\uf129",
+  "diagnostic.hintSign": "\uf864",
+  "diagnostic.displayByAle": false,
+  "diagnostic.refreshOnInsertMode": false,
+  "diagnostic.refreshAfterSave": false,
+  "diagnostic.checkCurrentLine": true,
+  "diagnostic.virtualTextPrefix": " ❯❯❯ ",
+  "diagnostic.virtualText": true,
 
-    "git.enableGutters": true,
-    "git.addGBlameToBufferVar": false,
-    "git.addGBlameToVirtualText": false,
-    "git.addedSign.hlGroup": "GitGutterAdd",
-    "git.changedSign.hlGroup": "GitGutterChange",
-    "git.removedSign.hlGroup": "GitGutterDelete",
-    "git.topRemovedSign.hlGroup": "GitGutterDelete",
-    "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
-
-    "suggest.detailMaxLength": 60,
-    "suggest.noselect": false,
-    "suggest.enablePreselect": false,
-    "suggest.triggerAfterInsertEnter": false,
-    "suggest.timeout": 5000,
-    "suggest.enablePreview": true,
-    "suggest.floatEnable": true,
-    "suggest.detailField": "preview",
-    "suggest.snippetIndicator": "",
-    "suggest.triggerCompletionWait": 100,
-    "suggest.echodocSupport": true,
-
-    "diagnostic.signOffset": 1,
-    "diagnostic.errorSign": "❌",
-    "diagnostic.warningSign": "⚠️",
-    "diagnostic.infoSign": "ℹ️",
-    "diagnostic.hintSign": "💭",
-    "diagnostic.displayByAle": false,
-    "diagnostic.refreshOnInsertMode": false,
-    "diagnostic.refreshAfterSave": false,
-    "diagnostic.checkCurrentLine": true,
-    "diagnostic.virtualTextPrefix": "❗",
-    "diagnostic.virtualText": true,
-
-    "explorer.width": 30,
-    "explorer.file.showHiddenFiles": true,
-    "explorer.icon.enableNerdfont": true,
-    "explorer.file.column.git.showIgnored": true,
-    "explorer.file.column.indent.indentLine": true,
-    "explorer.buffer.showHiddenBuffers": false,
-
-
-    "yank.enableCompletion": false,
-    "python.jediEnabled": false,
-    "python.formatting.provider": "autopep8",
-    "languageserver": {
-        "golang": {
-            "command": "gopls",
-            "rootPatterns": ["go.mod"],
-            "trace.server": "verbose",
-            "filetypes": ["go"]
-        },
-        "bash": {
-            "command": "bash-language-server",
-            "args": ["start"],
-            "filetypes": ["sh"]
-        },
-        "vue": {
-            "command": "vls",
-            "filetypes": ["vue"]
-        }
+  "explorer.width": 30,
+  "explorer.quitOnOpen": true,
+  "explorer.sources": [
+    {
+      "name": "buffer",
+      "expand": false
+    },
+    {
+      "name": "file",
+      "expand": true
     }
+  ],
+  "explorer.file.showHiddenFiles": true,
+  "explorer.file.column.git.showIgnored": true,
+  "explorer.file.column.indent.indentLine": true,
+  "explorer.buffer.showHiddenBuffers": false,
+  "explorer.icon.enableNerdfont": true,
+  "explorer.keyMappingMode": "none",
+  "explorer.keyMappings": {
+    "<tab>": "actionMenu",
+    "H": "gotoParent",
+    "h": "collapse",
+    "j": "nodeNext",
+    "k": "nodePrev",
+    "l": "expand",
+    "<cr>": "open",
+    "i": "toggleSelection",
+    "yp": "copyFilepath",
+    "yn": "copyFilename",
+    "yy": "copyFile",
+    "dd": "cutFile",
+    "pp": "pasteFile",
+    "dD": "deleteForever",
+    "a": "addFile",
+    "M": "addDirectory",
+    "cw": "rename",
+    ".": "toggleHidden",
+    "zh": "toggleHidden",
+    "R": "refresh",
+    "?": "help",
+    "q": "quit"
+  },
+
+  "python.autoComplete.addBrackets": true,
+  "python.jediEnabled": false,
+  "python.formatting.provider": "yapf",
+  "python.formatting.yapfArgs": [
+    "--style",
+    "{SPACES_AROUND_POWER_OPERATOR: True, SPACES_BEFORE_COMMENT: 1}"
+  ],
+
+  "git.enableGutters": true,
+  "git.addGBlameToBufferVar": false,
+  "git.addGBlameToVirtualText": false,
+  "git.addedSign.hlGroup": "GitGutterAdd",
+  "git.changedSign.hlGroup": "GitGutterChange",
+  "git.removedSign.hlGroup": "GitGutterDelete",
+  "git.topRemovedSign.hlGroup": "GitGutterDelete",
+  "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
+
+  "snippets.ultisnips.directories": [
+    "UltiSnips",
+    "$HOME/.config/nvim/UltiSnips",
+    "$HOME/.config/nvim/plugged/vim-snippets/UltiSnips"
+  ],
+
+  "codeLens.enable": true,
+  "yank.enableCompletion": false,
+  "translator.engines": ["google"],
+
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "disableWorkspaceFolders": true,
+      "filetypes": ["go"]
+    },
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    },
+    "rust": {
+      "command": "rust-analyzer",
+      "filetypes": ["rust"],
+      "rootPatterns": ["Cargo.toml"]
+    },
+    "vue": {
+      "command": "vls",
+      "filetypes": ["vue"]
+    }
+  }
 }
