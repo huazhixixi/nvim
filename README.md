@@ -22,7 +22,9 @@ mv ~/.config/nvim ~/.config/nvim.bak
 git clone --depth 1 https://github.com/Wjinlei/nvim.git ~/.config/nvim
 ```
 ### 安装后,您需要
-- [ ] Python安装`pynvim` `ueberzug`(pip)
+- [ ] Python2安装`pynvim`(pip)
+- [ ] Python3安装`pynvim`(pip)
+- [ ] Python3安装`ueberzug`(pip)
 - [ ] 安装NodeJS`nodejs`
 - [ ] NodeJS安装`neovim`(npm)
 - [ ] 安装`ctags`
