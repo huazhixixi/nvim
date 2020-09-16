@@ -243,7 +243,7 @@ Plug 'bling/vim-bufferline'
 " File navigation
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-Plug 'kevinhwang91/rnvimr', {'do': 'make sync'}
+Plug 'kevinhwang91/rnvimr'
 Plug 'pechorin/any-jump.vim'
 
 " Snippets
@@ -805,16 +805,17 @@ let g:rust_clip_command = 'xclip -selection clipboard'
 " ===
 " === rnvimr
 " ===
-let g:rnvimr_ex_enable = 1
-let g:rnvimr_pick_enable = 1
-nnoremap <silent> ff :RnvimrSync<CR>:RnvimrToggle<CR><C-\><C-n>:RnvimrResize 0<CR>
-let g:rnvimr_layout = { 'relative': 'editor',
-            \ 'width': &columns,
-            \ 'height': &lines,
-            \ 'col': 0,
-            \ 'row': 0,
-            \ 'style': 'minimal' }
-let g:rnvimr_presets = [{'width': 0.9, 'height': 0.9}]
+" Make Ranger replace Netrw and be the file explorer
+let g:rnvimr_enable_ex = 1
+" Make Ranger to be hidden after picking a file
+let g:rnvimr_enable_picker = 1
+" Make Neovim wipe the buffers corresponding to the files deleted by Ranger
+let g:rnvimr_enable_bw = 1
+" Set up only two columns in miller mode and draw border with both
+let g:rnvimr_ranger_cmd = 'ranger --cmd="set column_ratios 1,1"
+            \ --cmd="set draw_borders both"'
+nnoremap <silent> ff :RnvimrToggle<CR>
+let g:rnvimr_presets = [{'width': 0.7, 'height': 0.7}]
 
 
 " ===
