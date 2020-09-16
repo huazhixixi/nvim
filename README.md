@@ -22,9 +22,12 @@ mv ~/.config/nvim ~/.config/nvim.bak
 git clone --depth 1 https://github.com/Wjinlei/nvim.git ~/.config/nvim
 ```
 ### 安装后,您需要
-- [ ] 安装`pynvim`(pip)
-- [ ] 安装`nodejs`
-- [ ] 安装`neovim`(npm)
+- [ ] Python2安装`pynvim`(pip)
+- [ ] Python2安装`ueberzug`(pip)
+- [ ] Python3安装`pynvim`(pip)
+- [ ] Python3安装`ueberzug`(pip)
+- [ ] 安装NodeJS`nodejs`
+- [ ] NodeJS安装`neovim`(npm)
 - [ ] 安装`nerd-fonts`(此选项为可选，但使用nerd-font后，看起来更漂亮)
 - [ ] 安装`ctags`(用于显示函数/类/变量列表)
 - [ ] 安装`ripgrep`(Rg)
