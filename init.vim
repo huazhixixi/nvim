@@ -229,13 +229,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
 "Plug 'morhetz/gruvbox'
-"Plug 'srcery-colors/srcery-vim'
-"Plug 'ajmwagar/vim-deus'
+Plug 'ajmwagar/vim-deus'
 "Plug 'doums/darcula'
-"Plug 'connorholyday/vim-snazzy'
-"Plug 'sickill/vim-monokai'
-"Plug 'NLKNguyen/papercolor-theme'
-Plug 'liuchengxu/space-vim-theme'
+"Plug 'liuchengxu/space-vim-theme'
 Plug 'liuchengxu/eleline.vim'
 "Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
@@ -322,12 +318,8 @@ set termguicolors
 set background=dark " Setting dark mode
 "colorscheme gruvbox
 "colorscheme darcula
-"colorscheme deus
-"colorscheme srcery
-"colorscheme snazzy
-"colorscheme monokai
-"colorscheme PaperColor
-colorscheme space_vim_theme
+colorscheme deus
+"colorscheme space_vim_theme
 
 
 " ===
@@ -348,7 +340,7 @@ hi Comment guifg=#5C6370 ctermfg=59
 " === eleline
 " ===
 let g:eleline_powerline_fonts = 1
-let g:eleline_slim = 1
+"let g:eleline_slim = 1
 
 
 " ===
