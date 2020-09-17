@@ -574,7 +574,7 @@ xmap <silent> <LEADER>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<
 nmap <silent> <LEADER>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
+"autocmd CursorHold * silent call CocActionAsync('highlight')
 
 
 " Useful commands
