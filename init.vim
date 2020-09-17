@@ -563,16 +563,23 @@ function! s:show_documentation()
 endfunction
 
 " Remap for do codeAction of selected region
+" <LEADER>a for the current selected range
+" <LEADER>aw for the current word
+" <LEADER>aas for the current sentence
+" <LEADER>aap for the current paragraph
 function! s:cocActionsOpenFromSelected(type) abort
   execute 'CocCommand actions.open ' . a:type
 endfunction
-xmap <silent> <C-h> :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
-nmap <silent> <C-h> :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+xmap <silent> <LEADER>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+nmap <silent> <LEADER>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
 " Highlight the symbol and its references when holding the cursor.
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
+
 " Useful commands
+" CocCommand
+nnoremap <C-c> :CocCommand<CR>
 " coc-explorer
 nnoremap tt :CocCommand explorer<CR>
 " coc-translator

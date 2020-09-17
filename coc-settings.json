@@ -126,6 +126,10 @@
   "git.topRemovedSign.hlGroup": "GitGutterDelete",
   "git.changeRemovedSign.hlGroup": "GitGutterChangeDelete",
 
+  "coc-actions.hideCursor": false,
+  "coc-actions.showActionKind": true,
+  "coc-actions.useCursorLine": true,
+
   "snippets.ultisnips.directories": [
     "UltiSnips",
     "$HOME/.config/nvim/UltiSnips",
