@@ -230,9 +230,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Pretty Dress
 "Plug 'morhetz/gruvbox'
-Plug 'ajmwagar/vim-deus'
+"Plug 'ajmwagar/vim-deus'
 "Plug 'doums/darcula'
-"Plug 'liuchengxu/space-vim-theme'
+Plug 'liuchengxu/space-vim-theme'
 Plug 'liuchengxu/eleline.vim'
 "Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
@@ -320,8 +320,8 @@ set termguicolors
 set background=dark " Setting dark mode
 "colorscheme gruvbox
 "colorscheme darcula
-colorscheme deus
-"colorscheme space_vim_theme
+"colorscheme deus
+colorscheme space_vim_theme
 
 
 " ===
