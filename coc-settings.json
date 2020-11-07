@@ -94,7 +94,7 @@
   "explorer.buffer.showHiddenBuffers": false,
   "explorer.icon.enableNerdfont": true,
   "explorer.keyMappingMode": "none",
-  "explorer.keyMappings": {
+  "explorer.keyMappings.global": {
     "<tab>": "actionMenu",
     "H": "gotoParent",
     "h": "collapse",
