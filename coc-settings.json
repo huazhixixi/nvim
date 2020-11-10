@@ -89,7 +89,7 @@
     }
   ],
   "explorer.file.showHiddenFiles": true,
-  "explorer.file.column.git.showIgnored": true,
+  "explorer.git.showIgnored": true,
   "explorer.file.column.indent.indentLine": true,
   "explorer.buffer.showHiddenBuffers": false,
   "explorer.icon.enableNerdfont": true,
