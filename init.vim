@@ -233,8 +233,8 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ajmwagar/vim-deus'
 "Plug 'doums/darcula'
 "Plug 'liuchengxu/space-vim-theme'
-"Plug 'liuchengxu/eleline.vim'
-Plug 'itchyny/lightline.vim'
+Plug 'liuchengxu/eleline.vim'
+"Plug 'itchyny/lightline.vim'
 Plug 'bling/vim-bufferline'
 
 " File navigation
@@ -341,7 +341,7 @@ hi Comment guifg=#5C6370 ctermfg=59
 " ===
 " === eleline
 " ===
-"let g:eleline_powerline_fonts = 1
+let g:eleline_powerline_fonts = 1
 "let g:eleline_slim = 1
 
 
@@ -350,7 +350,7 @@ hi Comment guifg=#5C6370 ctermfg=59
 " ===
 "let g:lightline = { 'colorscheme': 'gruvbox' }
 "let g:lightline = { 'colorscheme': 'darculaOriginal' }
-let g:lightline = { 'colorscheme': 'deus' }
+"let g:lightline = { 'colorscheme': 'deus' }
 "let g:lightline = { 'colorscheme': 'srcery' }
 "let g:lightline = { 'colorscheme': 'snazzy' }
 "let g:lightline = { 'colorscheme': 'PaperColor' }
