@@ -336,7 +336,7 @@ colorscheme space_vim_theme
 " ===
 " === 灰色注释
 " ===
-hi Comment guifg=#5C6370 ctermfg=59
+"hi Comment guifg=#5C6370 ctermfg=59
 
 
 " ===
