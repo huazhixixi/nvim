@@ -854,8 +854,8 @@ let g:rnvimr_enable_picker = 1
 let g:rnvimr_enable_bw = 1
 " Link CursorLine into RnvimrNormal highlight in the Floating window
 highlight link RnvimrNormal CursorLine
-nnoremap <silent> R :RnvimrToggle<CR>
-tnoremap <silent> R <C-\><C-n>:RnvimrToggle<CR>
+nnoremap <silent> \r :RnvimrToggle<CR>
+tnoremap <silent> \r <C-\><C-n>:RnvimrToggle<CR>
 " Map Rnvimr action
 let g:rnvimr_action = {
             \ '<C-t>': 'NvimEdit tabedit',
